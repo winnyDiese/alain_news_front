@@ -21,10 +21,21 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetch(`${API_URL}`)
+      fetch(`${API_URL}/api/posts`)
       .then(res => res.json())
-      .then(data => setPosts(data));
-  }, []);
+      .then(data => {
+        console.log("Posts récupérés :", data)
+        // On filtre les posts valides avec un titre
+        const cleanedData = Array.isArray(data)
+          ? data.filter(p => p && typeof p.title === "string")
+          : []
+        setPosts(cleanedData)
+      })
+      .catch(err => {
+        console.error("Erreur de récupération :", err)
+        setPosts([]) // En cas d'erreur, on vide les posts pour éviter les plantages
+      })
+  )
 
   return (
     <main className="pt-20 max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
