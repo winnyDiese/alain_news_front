@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
 
   const refreshPost = async () => {
     const updated = await fetch(`${API_URL}/${id}`).then(res => res.json())
