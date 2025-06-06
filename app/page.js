@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-      fetch(`${API_URL}/api/posts`)
+      fetch(`${API_URL}`)
       .then(res => res.json())
       .then(data => {
         console.log("Posts récupérés :", data)
