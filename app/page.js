@@ -35,7 +35,7 @@ export default function Home() {
         console.error("Erreur de récupération :", err)
         setPosts([]) // En cas d'erreur, on vide les posts pour éviter les plantages
       })
-  )
+  })
 
 
   return (
