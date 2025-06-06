@@ -7,10 +7,12 @@ export default function NewPost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch('http://localhost:5000/api/posts', {
+    await fetch(`${API_URL}/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, content })
