@@ -72,19 +72,19 @@ export default function PostDetail() {
         <div className="pt-20 max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-[70%_30%] gap-8">
             {/* Colonne 1 : Post + Formulaire */}
             <div>
-                <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+                <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
                 <img
                     src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
-                    alt={post.title}
+                    alt={post?.title}
                     className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="mb-6">{post.content}</p>
+                <p className="mb-6">{post?.content}</p>
 
                   <div className="flex items-center gap-2 mb-6 mt-3">
                         <button onClick={handleLike} className="text-red-500 text- hover:scale-110 transition">
                         ❤️
                         </button>
-                        <span>{post.likes} like{post.likes !== 1 && 's'}</span>
+                        <span>{post?.likes} like{post?.likes !== 1 && 's'}</span>
                     </div>
 
                 <form onSubmit={handleCommentSubmit} className="flex flex-col gap-3 border-t pt-4">
@@ -114,13 +114,13 @@ export default function PostDetail() {
             {/* Colonne 2 : Commentaires */}
             <div>
                 <h2 className="text-2xl font-semibold mb-4">Comments</h2>
-                {post.comments.length === 0 ? (
+                {post?.comments.length === 0 ? (
                     <p className="text-gray-500 text-gray-400">No comments yet.</p>
                 ) : (
-                    post.comments.map((c, i) => (
+                    post?.comments.map((c, i) => (
                         <div key={i} className="mb-4 text-sm text-gray-600">
-                            <p className="font-semibold">{c.author}</p>
-                            <p>{c.content}</p>
+                            <p className="font-semibold">{c?.author}</p>
+                            <p>{c?.content}</p>
                             <hr className="mt-2" />
                         </div>
                     ))
