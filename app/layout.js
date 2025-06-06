@@ -26,37 +26,16 @@ export default function RootLayout({ children }) {
         <div className="bg-gray-100 min-h-screen">
 
           {/* Header / Navigation */}
-          <header className="bg-white shadow fixed top-0 left-0 right-0 z-50">
+          <header className="bg-white shadow fixed top-0 left-0 right-0 z-50 ">
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-              <h1 className="text-2xl md:text-3xl font-bold text-blue-900">
-                ALINO Nzungu
-              </h1>
-
-              {/* Menu Desktop */}
-              <nav className="hidden md:flex space-x-4 items-center">
-                <Link href="/" className="text-gray-700 hover:text-blue-600">Accueil</Link>
-                <Link href="/" className="text-gray-700 hover:text-blue-600">À propos</Link>
+              <h1 className="text-3xl font-bold text-blue-900">ALINO Nzungu </h1>
+              <nav className="space-x-4">
+               
                 <Link href="/new" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
                   Ajouter un post
                 </Link>
               </nav>
-
-              {/* Bouton burger mobile */}
-              <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
             </div>
-
-            {/* Menu Mobile */}
-            {isOpen && (
-              <nav className="md:hidden bg-white px-4 py-2 space-y-2 shadow">
-                <Link href="/" className="block text-gray-700 hover:text-blue-600">Accueil</Link>
-                <Link href="/" className="block text-gray-700 hover:text-blue-600">À propos</Link>
-                <Link href="/new" className="block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                  Ajouter un post
-                </Link>
-              </nav>
-            )}
           </header>
 
           {children}
