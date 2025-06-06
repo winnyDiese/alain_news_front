@@ -8,10 +8,12 @@ export default function PostDetail() {
     const [post, setPost] = useState(null)
     const [author, setAuthor] = useState('')
     const [comment, setComment] = useState('')
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+
 
     const fetchPost = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/posts/${id}`)
+            const res = await fetch(`${API_URL}/${id}`)
             const text = await res.text()
             const data = JSON.parse(text)
             setPost(data)
@@ -21,12 +23,12 @@ export default function PostDetail() {
     }
 
     const refreshPost = async () => {
-        const updated = await fetch(`http://localhost:5000/api/posts/${id}`).then(res => res.json())
+        const updated = await fetch(`${API_URL}/${id}`).then(res => res.json())
         setPost(updated)
     }
 
     const handleLike = async () => {
-        await fetch(`http://localhost:5000/api/posts/${id}/like`, {
+        await fetch(`${API_URL}/${id}/like`, {
         method: 'POST'
         })
         refreshPost();
@@ -40,7 +42,7 @@ export default function PostDetail() {
         e.preventDefault()
 
         try {
-            const res = await fetch(`http://localhost:5000/api/posts/${id}/comments`, {
+            const res = await fetch(`${API_URL}/${id}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ author, content: comment }),
