@@ -121,7 +121,7 @@ export default function PostDetail() {
                         <div key={i} className="mb-4 text-sm text-gray-600">
                             <p className="font-semibold">{c?.author}</p>
                             <p>{c?.content}</p>
-                            <hr className="mt-2" />
+                            <hr className="mt-2"/>
                         </div>
                     ))
                 )}
