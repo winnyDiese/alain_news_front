@@ -60,6 +60,14 @@ export default function Home() {
                 <p className="text-xs text-gray-600 line-clamp-2">
                   {post?.content}
                 </p>
+                  
+                <div className="flex items-center gap-2 mb-6 mt-3">
+                  <button onClick={handleLike} className="text-red-500 text-xs hover:scale-110 transition">
+                    ❤️
+                  </button>
+                  <span>{posts?.likes} like{posts?.likes !== 1 && 's'}</span>
+                </div>
+
               </div>
               <div className="relative h-24">
                 <Image
