@@ -6,21 +6,22 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
   const refreshPost = async () => {
-    const updated = await fetch(`http://localhost:5000/api/posts/${id}`).then(res => res.json())
+    const updated = await fetch(`${API_URL}/${id}`).then(res => res.json())
     setPosts()
   }
 
   const handleLike = async () => {
-    await fetch(`http://localhost:5000/api/posts/${id}/like`, {
+    await fetch(`${API_URL}/${id}/like`, {
       method: 'POST'
     })
     refreshPost();
   }
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/posts')
+    fetch(`${API_URL}`)
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
