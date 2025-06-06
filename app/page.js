@@ -37,16 +37,16 @@ export default function Home() {
         <div className="space-y-4">
           {posts.slice(0, 5).map((post) => (
             <Link
-              key={post._id}
-              href={`/post/${post._id}`}
+              key={post?._id}
+              href={`/post/${post?._id}`}
               className="block bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden border border-gray-100 hover:border-blue-200"
             >
               <div className="p-4 text-sm text-gray-800 space-y-1">
                 <h3 className="font-semibold text-gray-900 hover:text-blue-700 line-clamp-2">
-                  {post.title}
+                  {post?.title}
                 </h3>
                 <p className="text-xs text-gray-600 line-clamp-2">
-                  {post.content}
+                  {post?.content}
                 </p>
               </div>
               <div className="relative h-24">
@@ -71,7 +71,7 @@ export default function Home() {
         {/* Article principal */}
         {posts[0] && (
           <Link
-            href={`/post/${posts[0]._id}`}
+            href={`/post/${posts[0]?._id}`}
             className="block bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition mb-6"
           >
             <div className="relative h-64">
@@ -83,14 +83,14 @@ export default function Home() {
               />
             </div>
             <div className="p-4">
-              <h3 className="text-2xl font-bold text-gray-800">{posts[0].title}</h3>
-              <p className="text-gray-600 mt-2 line-clamp-4">{posts[0].content}</p>
+              <h3 className="text-2xl font-bold text-gray-800">{posts[0]?.title}</h3>
+              <p className="text-gray-600 mt-2 line-clamp-4">{posts[0]?.content}</p>
               
               <div className="flex items-center gap-2 mb-6 mt-3">
                 <button onClick={handleLike} className="text-red-500 text- hover:scale-110 transition">
                   ❤️
                 </button>
-                <span>{posts.likes} like{posts.likes !== 1 && 's'}</span>
+                <span>{posts?.likes} like{posts?.likes !== 1 && 's'}</span>
               </div>
 
             </div>
@@ -101,8 +101,8 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {posts.slice(1, 3).map((post) => (
             <Link
-              key={post._id}
-              href={`/post/${post._id}`}
+              key={post?._id}
+              href={`/post/${post?._id}`}
               className="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition"
             >
               <div className="relative h-48">
@@ -114,8 +114,8 @@ export default function Home() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800">{post.title}</h3>
-                <p className="text-gray-600 line-clamp-3 mt-2">{post.content}</p>
+                <h3 className="text-lg font-semibold text-gray-800">{post?.title}</h3>
+                <p className="text-gray-600 line-clamp-3 mt-2">{post?.content}</p>
               </div>
             </Link>
           ))}
@@ -125,8 +125,8 @@ export default function Home() {
         <div className="space-y-4">
           {posts.slice(3).map(post => (
             <Link
-              key={post._id}
-              href={`/post/${post._id}`}
+              key={post?._id}
+              href={`/post/${post?._id}`}
               className="block bg-white rounded-lg shadow hover:shadow-md transition"
             >
               <div className="relative h-48">
@@ -138,8 +138,8 @@ export default function Home() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800">{post.title}</h3>
-                <p className="text-gray-600 line-clamp-2 mt-1">{post.content}</p>
+                <h3 className="text-lg font-semibold text-gray-800">{post?.title}</h3>
+                <p className="text-gray-600 line-clamp-2 mt-1">{post?.content}</p>
               </div>
             </Link>
           ))}
@@ -154,7 +154,7 @@ export default function Home() {
             {posts.slice(0, 6).map((post, i) => (
               <li key={i} className="border-l-4 border-blue-600 pl-2 hover:underline">
                 <Link href={`/post/${post._id}`}>
-                  {post.title.length > 70 ? post.title.slice(0, 70) + "..." : post.title}
+                  {post?.title.length > 70 ? post?.title.slice(0, 70) + "..." : post?.title}
                 </Link>
               </li>
             ))}
