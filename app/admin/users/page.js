@@ -1,3 +1,5 @@
+"use  client"
+
 import { useState } from "react";
 import { PlusCircle } from "lucide-react"; // ou autre icône que tu utilises
 
