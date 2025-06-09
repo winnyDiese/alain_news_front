@@ -4,55 +4,83 @@ import { useEffect, useState } from "react";
 import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
 
+const initialBlogs = [
+  {
+    id: 1,
+    title: "How to Improve Your Workflow",
+    image:
+      "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
+    content:
+      "Improving your workflow is about optimizing your tools and habits. In this article, we explore key strategies for better efficiency...",
+    comments: [
+      {
+        id: 1,
+        author: "Alice",
+        text: "Great tips, I applied them and saw instant results!",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Mastering React Components",
+    image:
+      "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
+    content:
+      "React components are the building blocks of your UI. Learn how to structure and manage components like a pro.",
+    comments: [],
+  },
+];
+
 const BlogDashboard = () => {
-  const [posts, setPosts] = useState([]);
-  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [blogs, setBlogs] = useState(initialBlogs);
+  const [selectedBlog, setSelectedBlog] = useState(initialBlogs[0]);
   const [showForm, setShowForm] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     image: "",
     content: "",
   });
 
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL ||
-    "https://alain-news-back.onrender.com/api/posts";
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+
+
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        const cleanedData = Array.isArray(data)
-          ? data.filter((p) => p && typeof p.title === "string")
-          : [];
-        setPosts(cleanedData);
-        if (cleanedData.length > 0) {
-          setSelectedBlog(cleanedData[0]);
-        }
-      })
-      .catch((err) => {
-        console.error("Erreur de récupération :", err);
-        setPosts([]);
-      });
-  }, []);
+  
+    useEffect(() => {
+        fetch(`${API_URL}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log("Posts récupérés :", data)
+          // On filtre les posts valides avec un titre
+          const cleanedData = Array.isArray(data)
+            ? data.filter(p => p && typeof p.title === "string")
+            : []
+          setPosts(cleanedData)
+        })
+        .catch(err => {
+          console.error("Erreur de récupération :", err)
+          setPosts([]) // En cas d'erreur, on vide les posts pour éviter les plantages
+        })
+    })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newPost = {
-      _id: Date.now().toString(), // fake ID
-      title: formData.title,
-      image: formData.image,
-      content: formData.content,
-      comments: [],
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newBlog = {
+        id: blogs.length + 1,
+        title: formData.title,
+        image: formData.image,
+        content: formData.content,
+        comments: [],
+        };
+        setBlogs([newBlog, ...blogs]);
+        setSelectedBlog(newBlog);
+        setFormData({ title: "", image: "", content: "" });
+        setShowForm(false);
     };
-    setPosts([newPost, ...posts]);
-    setSelectedBlog(newPost);
-    setFormData({ title: "", image: "", content: "" });
-    setShowForm(false);
-  };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -135,87 +163,86 @@ const BlogDashboard = () => {
 
         {/* Détails de l'article */}
         <div className="w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 space-y-6">
-          {selectedBlog && (
-            <>
-              <div>
+            {/* Titre + image + contenu */}
+            <div>
                 <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-                  {selectedBlog.title}
+                {selectedBlog?.title}
                 </h2>
                 <Image
-                  src={selectedBlog.image}
-                  alt={selectedBlog.title}
-                  width={800}
-                  height={400}
-                  className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+                    src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
+                    alt={selectedBlog?.title}
+                    width={800}
+                    height={400}
+                    className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
                 />
                 <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
-                  {selectedBlog.content}
+                {selectedBlog?.content}
                 </p>
-              </div>
+            </div>
 
-              {/* Commentaires */}
-              <div>
+            {/* Commentaires */}
+            <div>
                 <div className="flex items-center gap-2 mb-2 mt-6">
-                  <MessageCircle className="text-green-500" />
-                  <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
+                <MessageCircle className="text-green-500" />
+                <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
                 </div>
-
+                
                 <form className="mb-6 space-y-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <div>
-                    <label htmlFor="author" className="block text-sm font-medium text-gray-700">
-                      Nom
-                    </label>
-                    <input
-                      type="text"
-                      name="author"
-                      id="author"
-                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      required
-                    />
-                  </div>
+                    <div>
+                        <label htmlFor="author" className="block text-sm font-medium text-gray-700">
+                        Nom
+                        </label>
+                        <input
+                        type="text"
+                        name="author"
+                        id="author"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        required
+                        />
+                    </div>
 
-                  <div>
-                    <label htmlFor="text" className="block text-sm font-medium text-gray-700">
-                      Commentaire
-                    </label>
-                    <textarea
-                      name="text"
-                      id="text"
-                      rows={3}
-                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      required
-                    ></textarea>
-                  </div>
+                    <div>
+                        <label htmlFor="text" className="block text-sm font-medium text-gray-700">
+                        Commentaire
+                        </label>
+                        <textarea
+                        name="text"
+                        id="text"
+                        rows={3}
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        required
+                        ></textarea>
+                    </div>
 
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-                  >
-                    Poster le commentaire
-                  </button>
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                    >
+                        Poster le commentaire
+                    </button>
                 </form>
 
-                {selectedBlog.comments?.length > 0 ? (
-                  <ul className="space-y-3">
+                {selectedBlog?.comments.length > 0 ? (
+                <ul className="space-y-3">
                     {selectedBlog.comments.map((comment) => (
-                      <li
-                        key={comment._id || comment.id}
+                    <li
+                        key={comment._id}
                         className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
-                      >
+                    >
                         <p className="text-gray-800 font-medium">{comment.author}</p>
-                        <p className="text-gray-600 text-sm">{comment.text}</p>
-                      </li>
+                        <p className="text-gray-600 text-sm">{comment.content}</p>
+                    </li>
                     ))}
-                  </ul>
+                </ul>
                 ) : (
-                  <p className="text-gray-500 italic">
+                <p className="text-gray-500 italic">
                     Aucun commentaire pour cet article.
-                  </p>
+                </p>
                 )}
-              </div>
-            </>
-          )}
+            </div>
         </div>
+
+
       </div>
     </div>
   );
