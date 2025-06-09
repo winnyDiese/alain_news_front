@@ -82,7 +82,25 @@ const BlogDashboard = () => {
 
       {/* Right Panel: Blog Detail */}
       <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 animate-fadeIn space-y-6">
-        {/* Comments Section */}
+
+        {/* Blog Title + Content */}
+        <div>
+          <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+            {selectedBlog.title}
+          </h2>
+          <Image
+            src={selectedBlog.image}
+            alt={selectedBlog.title}
+            width={800}
+            height={400}
+            className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+          />
+          <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
+            {selectedBlog.content}
+          </p>
+        </div>
+
+         {/* Comments Section */}
         <div>
           <div className="flex items-center gap-2 mb-2">
             <MessageCircle className="text-green-500" />
@@ -107,22 +125,6 @@ const BlogDashboard = () => {
           )}
         </div>
 
-        {/* Blog Title + Content */}
-        <div>
-          <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-            {selectedBlog.title}
-          </h2>
-          <Image
-            src={selectedBlog.image}
-            alt={selectedBlog.title}
-            width={800}
-            height={400}
-            className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
-          />
-          <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
-            {selectedBlog.content}
-          </p>
-        </div>
       </div>
     </div>
   );
