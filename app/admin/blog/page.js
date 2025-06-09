@@ -226,7 +226,7 @@ const BlogDashboard = () => {
                 <ul className="space-y-3">
                     {selectedBlog.comments.map((comment) => (
                     <li
-                        key={comment.id}
+                        key={comment._id}
                         className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
                     >
                         <p className="text-gray-800 font-medium">{comment.author}</p>
