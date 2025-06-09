@@ -1,6 +1,5 @@
-"use client"
-
 import { useState } from "react";
+import { ScrollText } from "lucide-react";
 
 const mockBlogs = [
   {
@@ -30,43 +29,44 @@ const BlogDashboard = () => {
   const [selectedBlog, setSelectedBlog] = useState(mockBlogs[0]);
 
   return (
-    <div className="min-h-screen flex bg-gray-100 p-4 gap-4">
+    <div className="min-h-screen flex bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 gap-6">
       {/* Left Panel: Blog List */}
-      <div className="w-full md:w-1/3 bg-white rounded-2xl shadow p-4 overflow-y-auto max-h-[calc(100vh-2rem)]">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Blog List</h2>
-        <table className="w-full text-sm">
-          <thead className="text-gray-500">
-            <tr>
-              <th className="text-left pb-2 border-b">Title</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mockBlogs.map((blog) => (
-              <tr
-                key={blog.id}
-                className={`cursor-pointer border-b hover:bg-gray-50 ${
-                  selectedBlog.id === blog.id ? "bg-blue-50" : ""
-                }`}
-                onClick={() => setSelectedBlog(blog)}
-              >
-                <td className="py-2">{blog.title}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="w-full md:w-1/3 bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[calc(100vh-3rem)] border border-gray-200 custom-scroll">
+        <div className="flex items-center gap-2 mb-4">
+          <ScrollText className="text-blue-500" />
+          <h2 className="text-xl font-semibold text-gray-700">Blog List</h2>
+        </div>
+
+        <ul>
+          {mockBlogs.map((blog) => (
+            <li
+              key={blog.id}
+              onClick={() => setSelectedBlog(blog)}
+              className={`p-3 rounded-xl mb-2 cursor-pointer transition-all duration-200 ${
+                selectedBlog.id === blog.id
+                  ? "bg-blue-100 text-blue-800 shadow-inner"
+                  : "hover:bg-gray-100 text-gray-700"
+              }`}
+            >
+              <p className="font-medium">{blog.title}</p>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Right Panel: Blog Detail */}
-      <div className="w-full md:w-2/3 bg-white rounded-2xl shadow p-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+      <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 animate-fadeIn">
+        <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
           {selectedBlog.title}
         </h2>
         <img
           src={selectedBlog.image}
           alt={selectedBlog.title}
-          className="w-full h-64 object-cover rounded-xl mb-4"
+          className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
         />
-        <p className="text-gray-700 text-lg">{selectedBlog.content}</p>
+        <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
+          {selectedBlog.content}
+        </p>
       </div>
     </div>
   );
