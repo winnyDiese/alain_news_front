@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollText } from "lucide-react";
+import Image from "next/image";
 
 const mockBlogs = [
   {
@@ -61,7 +62,7 @@ const BlogDashboard = () => {
         <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
           {selectedBlog.title}
         </h2>
-        <img
+        <Image
           src={selectedBlog.image}
           alt={selectedBlog.title}
           className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
