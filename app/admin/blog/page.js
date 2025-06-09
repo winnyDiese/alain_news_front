@@ -182,7 +182,7 @@ const BlogDashboard = () => {
 
             {/* Commentaires */}
             <div>
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-2 mt-6">
                 <MessageCircle className="text-green-500" />
                 <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
                 </div>
@@ -230,7 +230,7 @@ const BlogDashboard = () => {
                         className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
                     >
                         <p className="text-gray-800 font-medium">{comment.author}</p>
-                        <p className="text-gray-600 text-sm">{comment.text}</p>
+                        <p className="text-gray-600 text-sm">{comment.content}</p>
                     </li>
                     ))}
                 </ul>
