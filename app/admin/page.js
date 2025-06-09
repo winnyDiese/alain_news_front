@@ -78,6 +78,33 @@ const Dash = () => {
           </tbody>
         </table>
       </div>
+
+       {/* Table / Section */}
+      <div className="bg-white p-6 rounded-2xl shadow">
+        <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+        <table className="w-full text-left text-sm">
+          <thead className="text-gray-500 border-b">
+            <tr>
+              <th className="py-2">Name</th>
+              <th className="py-2">Action</th>
+              <th className="py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-700">
+            <tr className="border-b hover:bg-gray-50">
+              <td className="py-2">John Doe</td>
+              <td className="py-2">Created invoice</td>
+              <td className="py-2">2025-06-09</td>
+            </tr>
+            <tr className="border-b hover:bg-gray-50">
+              <td className="py-2">Jane Smith</td>
+              <td className="py-2">Sent payment</td>
+              <td className="py-2">2025-06-08</td>
+            </tr>
+            {/* ... */}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
