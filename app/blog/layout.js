@@ -12,7 +12,7 @@ export default function BlogLayout({ children }) {
         <header className="bg-white shadow fixed top-0 left-0 right-0 z-50 ">
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                 <h1 className="text-3xl font-bold text-blue-900">
-                <Link href="/">ALINO Nzungu</Link>
+                <Link href="/blog/">ALINO Nzungu</Link>
                 </h1>              
                 
                 <nav className="space-x-4">
