@@ -35,29 +35,52 @@ const BlogDashboard = () => {
   const [blogs, setBlogs] = useState(initialBlogs);
   const [selectedBlog, setSelectedBlog] = useState(initialBlogs[0]);
   const [showForm, setShowForm] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     image: "",
     content: "",
   });
 
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+
+
+
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newBlog = {
-      id: blogs.length + 1,
-      title: formData.title,
-      image: formData.image,
-      content: formData.content,
-      comments: [],
+  
+    useEffect(() => {
+        fetch(`${API_URL}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log("Posts récupérés :", data)
+          // On filtre les posts valides avec un titre
+          const cleanedData = Array.isArray(data)
+            ? data.filter(p => p && typeof p.title === "string")
+            : []
+          setPosts(cleanedData)
+        })
+        .catch(err => {
+          console.error("Erreur de récupération :", err)
+          setPosts([]) // En cas d'erreur, on vide les posts pour éviter les plantages
+        })
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newBlog = {
+        id: blogs.length + 1,
+        title: formData.title,
+        image: formData.image,
+        content: formData.content,
+        comments: [],
+        };
+        setBlogs([newBlog, ...blogs]);
+        setSelectedBlog(newBlog);
+        setFormData({ title: "", image: "", content: "" });
+        setShowForm(false);
     };
-    setBlogs([newBlog, ...blogs]);
-    setSelectedBlog(newBlog);
-    setFormData({ title: "", image: "", content: "" });
-    setShowForm(false);
-  };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -122,17 +145,17 @@ const BlogDashboard = () => {
           </div>
 
           <ul>
-            {blogs.map((blog) => (
+            {posts.map((post) => (
               <li
-                key={blog.id}
-                onClick={() => setSelectedBlog(blog)}
+                key={post._id}
+                onClick={() => setSelectedBlog(post)}
                 className={`p-3 rounded-xl mb-2 cursor-pointer transition-all duration-200 ${
-                  selectedBlog?.id === blog.id
+                  selectedBlog?._id === post._id
                     ? "bg-blue-100 text-blue-800 shadow-inner"
                     : "hover:bg-gray-100 text-gray-700"
                 }`}
               >
-                <p className="font-medium">{blog.title}</p>
+                <p className="font-medium">{post.title}</p>
               </li>
             ))}
           </ul>
