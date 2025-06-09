@@ -26,7 +26,12 @@ export default function UsersPage() {
 
   return (
     <div className="w-full flex flex-col gap-6">
-      {/* 🔽 Formulaire de création d'utilisateur */}
+     
+      <header className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800">Liste des utilisateurs</h1>
+      </header>
+
+       {/* 🔽 Formulaire de création d'utilisateur */}
       <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Ajouter un nouvel utilisateur</h2>
@@ -78,9 +83,6 @@ export default function UsersPage() {
         )}
       </div>
 
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Liste des utilisateurs</h1>
-      </header>
 
       {/* Tableau des utilisateurs */}
       <div className="bg-white p-6 rounded-2xl shadow">
@@ -122,7 +124,7 @@ export default function UsersPage() {
         </table>
       </div>
 
-      
+
     </div>
   );
 }
