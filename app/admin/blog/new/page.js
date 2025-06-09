@@ -140,48 +140,50 @@ const BlogDashboard = () => {
 
         {/* Détails de l'article */}
         <div className="w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 space-y-6">
-          {/* Commentaires */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <MessageCircle className="text-green-500" />
-              <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
+            {/* Titre + image + contenu */}
+            <div>
+                <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+                {selectedBlog?.title}
+                </h2>
+                <Image
+                src={selectedBlog?.image}
+                alt={selectedBlog?.title}
+                width={800}
+                height={400}
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+                />
+                <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
+                {selectedBlog?.content}
+                </p>
             </div>
-            {selectedBlog?.comments.length > 0 ? (
-              <ul className="space-y-3">
-                {selectedBlog.comments.map((comment) => (
-                  <li
-                    key={comment.id}
-                    className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
-                  >
-                    <p className="text-gray-800 font-medium">{comment.author}</p>
-                    <p className="text-gray-600 text-sm">{comment.text}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 italic">
-                Aucun commentaire pour cet article.
-              </p>
-            )}
-          </div>
 
-          {/* Titre + image + contenu */}
-          <div>
-            <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-              {selectedBlog?.title}
-            </h2>
-            <Image
-              src={selectedBlog?.image}
-              alt={selectedBlog?.title}
-              width={800}
-              height={400}
-              className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
-            />
-            <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
-              {selectedBlog?.content}
-            </p>
-          </div>
+            {/* Commentaires */}
+            <div>
+                <div className="flex items-center gap-2 mb-2">
+                <MessageCircle className="text-green-500" />
+                <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
+                </div>
+                {selectedBlog?.comments.length > 0 ? (
+                <ul className="space-y-3">
+                    {selectedBlog.comments.map((comment) => (
+                    <li
+                        key={comment.id}
+                        className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
+                    >
+                        <p className="text-gray-800 font-medium">{comment.author}</p>
+                        <p className="text-gray-600 text-sm">{comment.text}</p>
+                    </li>
+                    ))}
+                </ul>
+                ) : (
+                <p className="text-gray-500 italic">
+                    Aucun commentaire pour cet article.
+                </p>
+                )}
+            </div>
         </div>
+
+
       </div>
     </div>
   );
