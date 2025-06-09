@@ -2,8 +2,10 @@
 
 import React from 'react'
 
-export const Dash = () => {
+const Dash = () => {
   return (
     <div>Dash</div>
   )
 }
+
+export default Dash
