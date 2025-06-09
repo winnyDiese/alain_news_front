@@ -169,11 +169,11 @@ const BlogDashboard = () => {
                 {selectedBlog?.title}
                 </h2>
                 <Image
-                src={selectedBlog?.image}
-                alt={selectedBlog?.title}
-                width={800}
-                height={400}
-                className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+                    src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
+                    alt={selectedBlog?.title}
+                    width={800}
+                    height={400}
+                    className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
                 />
                 <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
                 {selectedBlog?.content}
