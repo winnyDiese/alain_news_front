@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+    title:"Admin"
+}
+
 export default function AdminLayout({ children }) {
   return (
     <div className="flex mt-20">
