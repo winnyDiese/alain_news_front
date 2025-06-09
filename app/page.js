@@ -83,7 +83,6 @@ export default function Home() {
       </aside>
 
 
-
       {/* Left Column - Featured News */}
       <section className="md:col-span-2 md:ordre-2 order-2">
         <h2 className="text-2xl font-semibold mb-4 text-gray-800">📰 Actualités</h2>
