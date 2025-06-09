@@ -80,7 +80,7 @@ const Dash = () => {
       </div>
 
        {/* Table / Section */}
-      <div className="bg-white p-6 rounded-2xl shadow">
+      <div className="bg-white p-6 rounded-2xl shadow mt-4">
         <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
         <table className="w-full text-left text-sm">
           <thead className="text-gray-500 border-b">
