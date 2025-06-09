@@ -163,6 +163,42 @@ const BlogDashboard = () => {
                 <MessageCircle className="text-green-500" />
                 <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
                 </div>
+                
+                <form className="mb-6 space-y-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div>
+                        <label htmlFor="author" className="block text-sm font-medium text-gray-700">
+                        Nom
+                        </label>
+                        <input
+                        type="text"
+                        name="author"
+                        id="author"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        required
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="text" className="block text-sm font-medium text-gray-700">
+                        Commentaire
+                        </label>
+                        <textarea
+                        name="text"
+                        id="text"
+                        rows={3}
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        required
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                    >
+                        Poster le commentaire
+                    </button>
+                </form>
+
                 {selectedBlog?.comments.length > 0 ? (
                 <ul className="space-y-3">
                     {selectedBlog.comments.map((comment) => (
