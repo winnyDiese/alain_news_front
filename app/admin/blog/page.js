@@ -8,21 +8,21 @@ const mockBlogs = [
   {
     id: 1,
     title: "How to Improve Your Workflow",
-    image: "https://source.unsplash.com/random/800x400?workflow",
+    image: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
     content:
       "Improving your workflow is about optimizing your tools and habits. In this article, we explore key strategies for better efficiency...",
   },
   {
     id: 2,
     title: "Mastering React Components",
-    image: "https://source.unsplash.com/random/800x400?react",
+    image: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
     content:
       "React components are the building blocks of your UI. Learn how to structure and manage components like a pro.",
   },
   {
     id: 3,
     title: "The Future of Web Design",
-    image: "https://source.unsplash.com/random/800x400?webdesign",
+    image: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
     content:
       "Web design is rapidly evolving. From minimalism to AI-powered UX, discover what's next in the design world.",
   },
