@@ -4,22 +4,27 @@ export const metadata = {
     title:"Admin"
 }
 
-export default function AdminLayout({ children }) {
+export default function BlogLayout({ children }) {
   return (
-    <html lang="fr">
-      <body className="bg-gray-100 min-h-screen">
-        <div className="flex">
-          <aside className="w-64 bg-gray-800 text-white p-4 min-h-screen">
-            <h2 className="text-xl font-bold mb-4">Admin</h2>
-            <ul className="space-y-2">
-              <li><Link href="/admin">Dashboard</Link></li>
-              <li><Link href="/admin/posts">Posts</Link></li>
-              <li><Link href="/admin/users">Users</Link></li>
-            </ul>
-          </aside>
-          <main className="flex-1 p-6">{children}</main>
+    <div className="bg-gray-100 min-h-screen">
+
+          {/* Header / Navigation */}
+          <header className="bg-white shadow fixed top-0 left-0 right-0 z-50 ">
+            <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+              <h1 className="text-3xl font-bold text-blue-900">
+                <Link href="/">ALINO Nzungu</Link>
+              </h1>              
+              
+              <nav className="space-x-4">
+                <Link href="/new" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                  Ajouter un post
+                </Link>
+              </nav>
+            </div>
+          </header>
+
+          {children}
+
         </div>
-      </body>
-    </html>
   );
 }
