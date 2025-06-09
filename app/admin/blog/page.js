@@ -81,7 +81,7 @@ const BlogDashboard = () => {
       </div>
 
       {/* Right Panel: Blog Detail */}
-      <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 animate-fadeIn space-y-6">
+      <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 pt-4 border border-gray-200 animate-fadeIn space-y-6">
 
         {/* Blog Title + Content */}
         <div>
