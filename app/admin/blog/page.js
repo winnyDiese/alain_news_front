@@ -32,15 +32,22 @@ const initialBlogs = [
 ];
 
 const BlogDashboard = () => {
-  const [blogs, setBlogs] = useState(initialBlogs);
-  const [selectedBlog, setSelectedBlog] = useState(initialBlogs[0]);
-  const [showForm, setShowForm] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [formData, setFormData] = useState({
-    title: "",
-    image: "",
-    content: "",
-  });
+    const [blogs, setBlogs] = useState(initialBlogs);
+    const [selectedBlog, setSelectedBlog] = useState(initialBlogs[0]);
+    const [showForm, setShowForm] = useState(false);
+    const [posts, setPosts] = useState([]);
+
+    
+    // commentaires
+    const [author, setAuthor] = useState('');
+    const [comment, setComment] = useState('');
+
+
+    const [formData, setFormData] = useState({
+        title: "",
+        image: "",
+        content: "",
+    });
 
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
 
@@ -81,6 +88,34 @@ const BlogDashboard = () => {
         setFormData({ title: "", image: "", content: "" });
         setShowForm(false);
     };
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await fetch(`${API_URL}/${id}/comments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ author, content: comment }),
+            })
+
+            if (!res.ok) {
+                const errorText = await res.text()
+                console.error('Erreur ajout commentaire :', errorText)
+                return
+            }
+
+            // Recharge les données à partir du backend (meilleure solution)
+            await refreshPost()
+
+            // Vider les champs APRÈS envoi
+            setAuthor('')
+            setComment('')
+
+        } catch (error) {
+            console.error('Erreur soumission commentaire :', error)
+        }
+    }
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -186,39 +221,31 @@ const BlogDashboard = () => {
                 <MessageCircle className="text-green-500" />
                 <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
                 </div>
-                
-                <form className="mb-6 space-y-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <div>
-                        <label htmlFor="author" className="block text-sm font-medium text-gray-700">
-                        Nom
-                        </label>
-                        <input
+
+                <form onSubmit={handleCommentSubmit} className="space-y-4">
+                    <input
                         type="text"
                         name="author"
-                        id="author"
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="Votre nom"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
                         required
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="text" className="block text-sm font-medium text-gray-700">
-                        Commentaire
-                        </label>
-                        <textarea
-                        name="text"
-                        id="text"
-                        rows={3}
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                    <textarea
+                        name="comment"
+                        placeholder="Votre commentaire"
+                        rows={4}
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
                         required
-                        ></textarea>
-                    </div>
-
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
                     >
-                        Poster le commentaire
+                        Publier le commentaire
                     </button>
                 </form>
 
