@@ -266,7 +266,7 @@ const BlogDashboard = () => {
                     Aucun commentaire pour cet article.
                 </p>
                 )}
-            </div>
+            </div> 
         </div>
 
 
