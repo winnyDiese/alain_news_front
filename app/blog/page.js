@@ -50,7 +50,7 @@ export default function Home() {
           {posts.slice(0, 5).map((post) => (
             <Link
               key={post?._id}
-              href={`/post/${post?._id}`}
+              href={`/blog/post/${post?._id}`}
               className="block bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden border border-gray-100 hover:border-blue-200"
             >
               <div className="p-4 text-sm text-gray-800 space-y-1">
@@ -90,7 +90,7 @@ export default function Home() {
         {/* Article principal */}
         {posts[0] && (
           <Link
-            href={`/post/${posts[0]?._id}`}
+            href={`/blog/post/${posts[0]?._id}`}
             className="block bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition mb-6"
           >
             <div className="relative h-64">
@@ -121,7 +121,7 @@ export default function Home() {
           {posts.slice(1, 3).map((post) => (
             <Link
               key={post?._id}
-              href={`/post/${post?._id}`}
+              href={`/blog/post/${post?._id}`}
               className="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition"
             >
               <div className="relative h-48">
@@ -145,7 +145,7 @@ export default function Home() {
           {posts.slice(3).map(post => (
             <Link
               key={post?._id}
-              href={`/post/${post?._id}`}
+              href={`/blog/post/${post?._id}`}
               className="block bg-white rounded-lg shadow hover:shadow-md transition"
             >
               <div className="relative h-48">
@@ -172,7 +172,7 @@ export default function Home() {
           <ul className="space-y-3 text-sm text-gray-700">
             {posts.slice(0, 6).map((post, i) => (
               <li key={i} className="border-l-4 border-blue-600 pl-2 hover:underline">
-                <Link href={`/post/${post._id}`}>
+                <Link href={`/blog/post/${post._id}`}>
                   {post?.title.length > 70 ? post?.title.slice(0, 70) + "..." : post?.title}
                 </Link>
               </li>
