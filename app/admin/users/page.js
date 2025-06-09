@@ -1,6 +1,6 @@
 import { BarChart3, Users, DollarSign, FileText } from 'lucide-react';
 
-const Users = () => {
+const UsersCompo = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       {/* Header */}
@@ -96,4 +96,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersCompo;
