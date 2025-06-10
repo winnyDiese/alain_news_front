@@ -112,16 +112,16 @@ const BlogDashboard = () => {
 
 
             // Recharger les articles pour rafraîchir les commentaires
-            const updatedRes = await fetch(`${API_URL}`);
-            const updatedData = await updatedRes.json();
-            const cleanedData = Array.isArray(updatedData)
-            ? updatedData.filter((p) => p && typeof p.title === "string")
-            : [];
-            setPosts(cleanedData);
+            // const updatedRes = await fetch(`${API_URL}`);
+            // const updatedData = await updatedRes.json();
+            // const cleanedData = Array.isArray(updatedData)
+            // ? updatedData.filter((p) => p && typeof p.title === "string")
+            // : [];
+            // setPosts(cleanedData);
 
-            // Trouver à nouveau le post sélectionné
-            const updatedPost = cleanedData.find((p) => p._id === selectedBlog._id);
-            setSelectedBlog(updatedPost);
+            // // Trouver à nouveau le post sélectionné
+            // const updatedPost = cleanedData.find((p) => p._id === selectedBlog._id);
+            // setSelectedBlog(updatedPost);
 
 
            
