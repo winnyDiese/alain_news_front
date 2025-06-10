@@ -12,25 +12,24 @@ const BlogDashboard = () => {
     const [showForm, setShowForm] = useState(false);
     const [posts, setPosts] = useState([]);
 
+    const [formData, setFormData] = useState({ title: '', content: '' });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
     
     // commentaires
     const [author, setAuthor] = useState('');
     const [comment, setComment] = useState('');
 
 
-    const [formData, setFormData] = useState({
-        title: "",
-        image: "",
-        content: "",
-    });
-
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
 
 
-
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
   
     useEffect(() => {
         fetch(`${API_URL}`)
@@ -50,33 +49,33 @@ const BlogDashboard = () => {
     },[])
 
     const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError('');
-  setSuccess('');
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        setSuccess('');
 
-  try {
-    const res = await fetch(`${API_URL}/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: formData.title, content: formData.content }),
-    });
+        try {
+            const res = await fetch(`${API_URL}/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: formData.title, content: formData.content }),
+            });
 
-    if (!res.ok) {
-      const errData = await res.json();
-      throw new Error(errData.message || 'Une erreur est survenue.');
-    }
+            if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(errData.message || 'Une erreur est survenue.');
+            }
 
-    setSuccess('Article publié avec succès.');
-    setFormData({ title: '', content: '' });
-    // router.push('/'); // décommenter si tu veux rediriger
+            setSuccess('Article publié avec succès.');
+            setFormData({ title: '', content: '' });
+            // router.push('/'); // décommenter si tu veux rediriger
 
-  } catch (error) {
-    setError(error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     const handleCommentSubmit = async (e) => {
@@ -137,32 +136,46 @@ const BlogDashboard = () => {
         </div>
 
         {showForm && (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="title"
-              placeholder="Titre de l'article"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <textarea
-              name="content"
-              placeholder="Contenu de l'article"
-              rows={5}
-              value={formData.content}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
-            >
-              Publier
-            </button>
-          </form>
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl shadow-lg max-w-xl mx-auto">
+                <h2 className="text-2xl font-bold text-gray-800">Publier un nouvel article</h2>
+
+                {error && <p className="text-red-600 bg-red-100 p-2 rounded">{error}</p>}
+                {success && <p className="text-green-600 bg-green-100 p-2 rounded">{success}</p>}
+
+                <div>
+                    <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Titre</label>
+                    <input
+                    type="text"
+                    name="title"
+                    placeholder="Titre de l'article"
+                    value={formData.title}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">Contenu</label>
+                    <textarea
+                    name="content"
+                    placeholder="Contenu de l'article"
+                    rows={6}
+                    value={formData.content}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-50"
+                >
+                    {loading ? 'Publication en cours...' : 'Publier'}
+                </button>
+            </form>
         )}
       </div>
 
