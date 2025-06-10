@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 
@@ -16,6 +17,8 @@ const BlogDashboard = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    const router = useRouter();
 
     
     // commentaires
@@ -68,7 +71,7 @@ const BlogDashboard = () => {
 
             setSuccess('Article publié avec succès.');
             setFormData({ title: '', content: '' });
-            // router.push('/'); // décommenter si tu veux rediriger
+            router.push('/'); // décommenter si tu veux rediriger
 
         } catch (error) {
             setError(error.message);
@@ -110,6 +113,10 @@ const BlogDashboard = () => {
             // Trouver à nouveau le post sélectionné
             const updatedPost = cleanedData.find((p) => p._id === selectedBlog._id);
             setSelectedBlog(updatedPost);
+
+
+            router.push('/');
+
 
             // Vider les champs APRÈS envoi
             setAuthor('')
