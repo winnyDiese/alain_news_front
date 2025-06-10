@@ -71,7 +71,7 @@ const BlogDashboard = () => {
 
             setSuccess('Article publié avec succès.');
             setFormData({ title: '', content: '' });
-            router.push('/admin/blog'); // décommenter si tu veux rediriger
+            router.refresh(); // décommenter si tu veux rediriger
 
         } catch (error) {
             setError(error.message);
@@ -102,7 +102,7 @@ const BlogDashboard = () => {
                 return
             }
 
-            router.push('/admin/blog');
+            router.refresh();
 
             // Recharger les articles pour rafraîchir les commentaires
             const updatedRes = await fetch(`${API_URL}`);
