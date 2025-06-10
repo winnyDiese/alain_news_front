@@ -49,20 +49,35 @@ const BlogDashboard = () => {
         })
     },[])
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newBlog = {
-        id: blogs.length + 1,
-        title: formData.title,
-        image: formData.image,
-        content: formData.content,
-        comments: [],
-        };
-        setBlogs([newBlog, ...blogs]);
-        setSelectedBlog(newBlog);
-        setFormData({ title: "", image: "", content: "" });
-        setShowForm(false);
-    };
+    const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  setSuccess('');
+
+  try {
+    const res = await fetch(`${API_URL}/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: formData.title, content: formData.content }),
+    });
+
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.message || 'Une erreur est survenue.');
+    }
+
+    setSuccess('Article publié avec succès.');
+    setFormData({ title: '', content: '' });
+    // router.push('/'); // décommenter si tu veux rediriger
+
+  } catch (error) {
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -128,15 +143,6 @@ const BlogDashboard = () => {
               name="title"
               placeholder="Titre de l'article"
               value={formData.title}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <input
-              type="url"
-              name="image"
-              placeholder="Lien de l'image"
-              value={formData.image}
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
