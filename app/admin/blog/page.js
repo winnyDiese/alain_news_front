@@ -4,32 +4,6 @@ import { useEffect, useState } from "react";
 import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
 
-const initialBlogs = [
-  {
-    id: 1,
-    title: "How to Improve Your Workflow",
-    image:
-      "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
-    content:
-      "Improving your workflow is about optimizing your tools and habits. In this article, we explore key strategies for better efficiency...",
-    comments: [
-      {
-        id: 1,
-        author: "Alice",
-        text: "Great tips, I applied them and saw instant results!",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Mastering React Components",
-    image:
-      "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
-    content:
-      "React components are the building blocks of your UI. Learn how to structure and manage components like a pro.",
-    comments: [],
-  },
-];
 
 const BlogDashboard = () => {
     const [blogs, setBlogs] = useState(initialBlogs);
