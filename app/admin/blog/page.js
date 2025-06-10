@@ -85,8 +85,8 @@ const BlogDashboard = () => {
     };
 
 
-    const handleCommentSubmit = async (e) => {
-        e.preventDefault()
+   const handleCommentSubmit = async (e) => {
+        e.preventDefault();
 
         if (!selectedBlog?._id) {
             console.error("Aucun article sélectionné pour commenter.");
@@ -98,27 +98,29 @@ const BlogDashboard = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ author, content: comment }),
-            })
+            });
 
             if (!res.ok) {
-                const errorText = await res.text()
-                console.error('Erreur ajout commentaire :', errorText)
-                return
+                const errorText = await res.text();
+                console.error('Erreur ajout commentaire :', errorText);
+                return;
             }
 
-            setAuthor('')
-            setComment('')
+            // IMPORTANT: vider les champs immédiatement
+            setAuthor('');
+            setComment('');
 
-            // Attendre un tout petit peu avant de recharger (pour permettre le reset des champs)
+            // Attendre que React applique les changements, puis recharger
             setTimeout(() => {
-             window.location.href = window.location.href;
-            }, 100);
-                    
+                console.log("Rechargement forcé...");
+                window.location.reload(); // Mieux que href ici
+            }, 200); // 200ms pour laisser le temps à React
 
         } catch (error) {
-            console.error('Erreur soumission commentaire :', error)
+            console.error('Erreur soumission commentaire :', error);
         }
-    }
+    };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
