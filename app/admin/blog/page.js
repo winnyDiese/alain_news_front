@@ -102,6 +102,8 @@ const BlogDashboard = () => {
                 return
             }
 
+            router.push('/admin/blog');
+
             // Recharger les articles pour rafraîchir les commentaires
             const updatedRes = await fetch(`${API_URL}`);
             const updatedData = await updatedRes.json();
@@ -115,7 +117,7 @@ const BlogDashboard = () => {
             setSelectedBlog(updatedPost);
 
 
-            router.push('/admin/blog');
+           
 
 
             // Vider les champs APRÈS envoi
