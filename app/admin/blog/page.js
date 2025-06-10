@@ -109,27 +109,11 @@ const BlogDashboard = () => {
             setAuthor('')
             setComment('')
 
-                // router.refresh();
-                //  window.location.reload();
-                
+            // Attendre un tout petit peu avant de recharger (pour permettre le reset des champs)
+            setTimeout(() => {
              window.location.href = window.location.href;
-
-
-            // Recharger les articles pour rafraîchir les commentaires
-            // const updatedRes = await fetch(`${API_URL}`);
-            // const updatedData = await updatedRes.json();
-            // const cleanedData = Array.isArray(updatedData)
-            // ? updatedData.filter((p) => p && typeof p.title === "string")
-            // : [];
-            // setPosts(cleanedData);
-
-            // // Trouver à nouveau le post sélectionné
-            // const updatedPost = cleanedData.find((p) => p._id === selectedBlog._id);
-            // setSelectedBlog(updatedPost);
-
-
-            // Vider les champs APRÈS envoi
-           
+            }, 100);
+                    
 
         } catch (error) {
             console.error('Erreur soumission commentaire :', error)
