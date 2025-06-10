@@ -5,9 +5,10 @@ import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
 
 
+
 const BlogDashboard = () => {
     const [blogs, setBlogs] = useState(initialBlogs);
-    const [selectedBlog, setSelectedBlog] = useState(initialBlogs[0]);
+    const [selectedBlog, setSelectedBlog] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [posts, setPosts] = useState([]);
 
