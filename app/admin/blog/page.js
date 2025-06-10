@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const BlogDashboard = () => {
     const [blogs, setBlogs] = useState([]);
-    const [selectedBlog, setSelectedBlog] = useState([]);
+    const [selectedBlog, setSelectedBlog] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [posts, setPosts] = useState([]);
 
@@ -239,23 +239,24 @@ const BlogDashboard = () => {
                 </button>
             </form>
 
-            {selectedBlog.comments.length > 0 ? (
-                <ul className="space-y-3">
-                {selectedBlog.comments.map((comment) => (
-                    <li
-                    key={comment._id}
-                    className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
-                    >
-                    <p className="text-gray-800 font-medium">{comment.author}</p>
-                    <p className="text-gray-600 text-sm">{comment.content}</p>
-                    </li>
-                ))}
-                </ul>
-            ) : (
-                <p className="text-gray-500 italic p-3">
-                Aucun commentaire pour cet article.
-                </p>
+            {selectedBlog?.comments ? (
+                selectedBlog.comments.length > 0 ? (
+                    <ul className="space-y-3">
+                    {selectedBlog.comments.map((comment) => (
+                        <li key={comment._id} className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm">
+                        <p className="text-gray-800 font-medium">{comment.author}</p>
+                        <p className="text-gray-600 text-sm">{comment.content}</p>
+                        </li>
+                    ))}
+                    </ul>
+                ) : (
+                    <p className="text-gray-500 italic p-3">Aucun commentaire pour cet article.</p>
+                )
+                ) : (
+                <p className="text-gray-400">Chargement des commentaires...</p>
             )}
+
+
             </div>
         </div>
         ) : (
