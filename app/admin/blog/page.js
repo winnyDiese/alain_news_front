@@ -111,7 +111,8 @@ const BlogDashboard = () => {
 
                 // router.refresh();
                 //  window.location.reload();
-                window.location.href = window.location.href;
+                
+             window.location.href = window.location.href;
 
 
             // Recharger les articles pour rafraîchir les commentaires
