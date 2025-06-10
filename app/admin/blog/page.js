@@ -210,78 +210,88 @@ const BlogDashboard = () => {
           </ul>
         </div>
 
-        {/* Détails de l'article */}
+       {selectedBlog ? (
+        // S'il y a un article sélectionné
         <div className="w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 space-y-6">
             {/* Titre + image + contenu */}
             <div>
-                <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-                {selectedBlog?.title}
-                </h2>
-                <Image
-                    src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
-                    alt={selectedBlog?.title}
-                    width={800}
-                    height={400}
-                    className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
-                />
-                <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
-                {selectedBlog?.content}
-                </p>
+            <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+                {selectedBlog.title}
+            </h2>
+            <Image
+                src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
+                alt={selectedBlog.title}
+                width={800}
+                height={400}
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+            />
+            <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
+                {selectedBlog.content}
+            </p>
             </div>
 
             {/* Commentaires */}
             <div>
-                <div className="flex items-center gap-2 mb-2 mt-6">
+            <div className="flex items-center gap-2 mb-2 mt-6">
                 <MessageCircle className="text-green-500" />
                 <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
-                </div>
+            </div>
 
-                <form onSubmit={handleCommentSubmit} className="space-y-4 mb-3">
-                    <input
-                        type="text"
-                        name="author"
-                        placeholder="Votre nom"
-                        value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
-                        required
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    <textarea
-                        name="comment"
-                        placeholder="Votre commentaire"
-                        rows={4}
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    <button
-                        type="submit"
-                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
-                    >
-                        Publier le commentaire
-                    </button>
-                </form>
+            <form onSubmit={handleCommentSubmit} className="space-y-4 mb-3">
+                <input
+                type="text"
+                name="author"
+                placeholder="Votre nom"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                required
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <textarea
+                name="comment"
+                placeholder="Votre commentaire"
+                rows={4}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                required
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <button
+                type="submit"
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
+                >
+                Publier le commentaire
+                </button>
+            </form>
 
-                {selectedBlog?.comments.length > 0 ? (
+            {selectedBlog.comments.length > 0 ? (
                 <ul className="space-y-3">
-                    {selectedBlog.comments.map((comment) => (
+                {selectedBlog.comments.map((comment) => (
                     <li
-                        key={comment._id}
-                        className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
+                    key={comment._id}
+                    className="bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm"
                     >
-                        <p className="text-gray-800 font-medium">{comment.author}</p>
-                        <p className="text-gray-600 text-sm">{comment.content}</p>
+                    <p className="text-gray-800 font-medium">{comment.author}</p>
+                    <p className="text-gray-600 text-sm">{comment.content}</p>
                     </li>
-                    ))}
+                ))}
                 </ul>
-                ) : (
+            ) : (
                 <p className="text-gray-500 italic p-3">
-                    Aucun commentaire pour cet article.
+                Aucun commentaire pour cet article.
                 </p>
-                )}
-            </div> 
+            )}
+            </div>
         </div>
+        ) : (
+        // S'il n'y a pas d'article sélectionné
+        <div className="w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200 text-center">
+            <p className="text-gray-500 italic text-lg">
+            Aucun article sélectionné.
+            </p>
+        </div>
+        )}
+
 
 
       </div>
