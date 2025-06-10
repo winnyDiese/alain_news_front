@@ -106,6 +106,9 @@ const BlogDashboard = () => {
                 return
             }
 
+            setAuthor('')
+            setComment('')
+
                 // router.refresh();
                 //  window.location.reload();
                 window.location.href = window.location.href;
@@ -124,12 +127,8 @@ const BlogDashboard = () => {
             // setSelectedBlog(updatedPost);
 
 
-           
-
-
             // Vider les champs APRÈS envoi
-            setAuthor('')
-            setComment('')
+           
 
         } catch (error) {
             console.error('Erreur soumission commentaire :', error)
