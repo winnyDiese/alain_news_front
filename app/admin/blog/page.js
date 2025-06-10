@@ -7,7 +7,7 @@ import Image from "next/image";
 
 
 const BlogDashboard = () => {
-    const [blogs, setBlogs] = useState(initialBlogs);
+    const [blogs, setBlogs] = useState([]);
     const [selectedBlog, setSelectedBlog] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [posts, setPosts] = useState([]);
