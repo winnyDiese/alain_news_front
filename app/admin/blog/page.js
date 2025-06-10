@@ -72,7 +72,7 @@ const BlogDashboard = () => {
           console.error("Erreur de récupération :", err)
           setPosts([]) // En cas d'erreur, on vide les posts pour éviter les plantages
         })
-    })
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -92,8 +92,13 @@ const BlogDashboard = () => {
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
 
+        if (!selectedBlog?._id) {
+            console.error("Aucun article sélectionné pour commenter.");
+            return;
+        }
+
         try {
-            const res = await fetch(`${API_URL}/${id}/comments`, {
+            const res = await fetch(`${API_URL}/${selectedBlog._id}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ author, content: comment }),
@@ -105,8 +110,17 @@ const BlogDashboard = () => {
                 return
             }
 
-            // Recharge les données à partir du backend (meilleure solution)
-            await refreshPost()
+            // Recharger les articles pour rafraîchir les commentaires
+            const updatedRes = await fetch(`${API_URL}`);
+            const updatedData = await updatedRes.json();
+            const cleanedData = Array.isArray(updatedData)
+            ? updatedData.filter((p) => p && typeof p.title === "string")
+            : [];
+            setPosts(cleanedData);
+
+            // Trouver à nouveau le post sélectionné
+            const updatedPost = cleanedData.find((p) => p._id === selectedBlog._id);
+            setSelectedBlog(updatedPost);
 
             // Vider les champs APRÈS envoi
             setAuthor('')
@@ -222,7 +236,7 @@ const BlogDashboard = () => {
                 <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
                 </div>
 
-                <form onSubmit={handleCommentSubmit} className="space-y-4">
+                <form onSubmit={handleCommentSubmit} className="space-y-4 mb-3">
                     <input
                         type="text"
                         name="author"
@@ -262,7 +276,7 @@ const BlogDashboard = () => {
                     ))}
                 </ul>
                 ) : (
-                <p className="text-gray-500 italic">
+                <p className="text-gray-500 italic p-3">
                     Aucun commentaire pour cet article.
                 </p>
                 )}
