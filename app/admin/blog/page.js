@@ -71,9 +71,11 @@ const BlogDashboard = () => {
 
             setSuccess('Article publié avec succès.');
             setFormData({ title: '', content: '' });
+            
             //  router.refresh(); // décommenter si tu veux rediriger
+            //  window.location.reload();
 
-             window.location.reload();
+             window.location.href = window.location.href;
 
         } catch (error) {
             setError(error.message);
@@ -105,7 +107,9 @@ const BlogDashboard = () => {
             }
 
                 // router.refresh();
-                 window.location.reload();
+                //  window.location.reload();
+                window.location.href = window.location.href;
+
 
             // Recharger les articles pour rafraîchir les commentaires
             const updatedRes = await fetch(`${API_URL}`);
