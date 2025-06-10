@@ -71,7 +71,7 @@ const BlogDashboard = () => {
 
             setSuccess('Article publié avec succès.');
             setFormData({ title: '', content: '' });
-            router.push('/'); // décommenter si tu veux rediriger
+            router.push('/admin/blog'); // décommenter si tu veux rediriger
 
         } catch (error) {
             setError(error.message);
@@ -115,7 +115,7 @@ const BlogDashboard = () => {
             setSelectedBlog(updatedPost);
 
 
-            router.push('/');
+            router.push('/admin/blog');
 
 
             // Vider les champs APRÈS envoi
