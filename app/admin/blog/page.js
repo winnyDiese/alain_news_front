@@ -26,7 +26,7 @@ const BlogDashboard = () => {
     const [comment, setComment] = useState('');
 
 
-    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api"
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,7 +34,7 @@ const BlogDashboard = () => {
     };
   
     useEffect(() => {
-        fetch(`${API_URL}`)
+        fetch(`${API_URL}/posts`)
         .then(res => res.json())
         .then(data => {
           console.log("Posts récupérés :", data)
@@ -57,7 +57,7 @@ const BlogDashboard = () => {
         setSuccess('');
 
         try {
-            const res = await fetch(`${API_URL}/`, {
+            const res = await fetch(`${API_URL}/posts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: formData.title, content: formData.content }),
@@ -93,7 +93,7 @@ const BlogDashboard = () => {
         }
 
         try {
-            const res = await fetch(`${API_URL}/${selectedBlog._id}/comments`, {
+            const res = await fetch(`${API_URL}/posts/${selectedBlog._id}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ author, content: comment }),
