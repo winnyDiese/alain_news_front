@@ -1,7 +1,9 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusCircle } from "lucide-react";
+
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
 export default function UsersPage() {
   const [showForm, setShowForm] = useState(false);
@@ -10,28 +12,69 @@ export default function UsersPage() {
     email: "",
     type: ""
   });
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  // 🔽 Récupération des utilisateurs
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch(`${API_URL}/users`);
+        const data = await res.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Erreur lors du chargement des utilisateurs :", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  // 🔽 Gérer les champs du formulaire
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // 🔽 Soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 🔽 Ajouter la logique pour envoyer les données (POST)
-    console.log("Nouvel utilisateur :", formData);
-    // reset
-    setFormData({ name: "", email: "", type: "" });
-    setShowForm(false);
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: formData.name,
+          email: formData.email,
+          password: formData.type // temporairement comme "mot de passe"
+        })
+      });
+
+      if (!res.ok) throw new Error("Échec de l'ajout");
+
+      const newUser = await res.json();
+      setUsers([...users, newUser]);
+
+      // reset
+      setFormData({ name: "", email: "", type: "" });
+      setShowForm(false);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout :", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full flex flex-col gap-6">
-     
       <header className="mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Liste des utilisateurs</h1>
       </header>
 
-       {/* 🔽 Formulaire de création d'utilisateur */}
+      {/* 🔽 Formulaire */}
       <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Ajouter un nouvel utilisateur</h2>
@@ -76,15 +119,15 @@ export default function UsersPage() {
             <button
               type="submit"
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
+              disabled={loading}
             >
-              Enregistrer
+              {loading ? "Enregistrement..." : "Enregistrer"}
             </button>
           </form>
         )}
       </div>
 
-
-      {/* Tableau des utilisateurs */}
+      {/* 🔽 Tableau */}
       <div className="bg-white p-6 rounded-2xl shadow">
         <table className="w-full text-left text-sm">
           <thead className="text-gray-500 border-b">
@@ -96,35 +139,27 @@ export default function UsersPage() {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            <tr className="border-b hover:bg-gray-50">
-              <td className="py-2">Alice Martin</td>
-              <td className="py-2">alice@example.com</td>
-              <td className="py-2">Admin</td>
-              <td className="py-2">2025-05-01</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="py-2">Jean Dupont</td>
-              <td className="py-2">jean.dupont@example.com</td>
-              <td className="py-2">Utilisateur</td>
-              <td className="py-2">2025-04-21</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="py-2">Fatima B.</td>
-              <td className="py-2">fatima.b@example.com</td>
-              <td className="py-2">Éditeur</td>
-              <td className="py-2">2025-06-01</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="py-2">Louis R.</td>
-              <td className="py-2">louisr@example.com</td>
-              <td className="py-2">Utilisateur</td>
-              <td className="py-2">2025-06-08</td>
-            </tr>
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="py-4 text-center text-gray-400">
+                  Aucun utilisateur enregistré.
+                </td>
+              </tr>
+            ) : (
+              users.map((user) => (
+                <tr key={user._id} className="border-b hover:bg-gray-50">
+                  <td className="py-2">{user.username}</td>
+                  <td className="py-2">{user.email}</td>
+                  <td className="py-2">{user.password}</td> {/* utilisé ici comme rôle */}
+                  <td className="py-2">
+                    {new Date(user.createdAt).toLocaleDateString("fr-FR")}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
-
-
     </div>
   );
 }
