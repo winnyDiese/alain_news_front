@@ -108,9 +108,9 @@ export default function UsersPage() {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <input
-              type="text"
+              type="password"
               name="type"
-              placeholder="Type d'utilisateur (ex: admin, éditeur...)"
+              placeholder="Mot de passe..."
               value={formData.type}
               onChange={handleChange}
               required
@@ -134,7 +134,7 @@ export default function UsersPage() {
             <tr>
               <th className="py-2">Nom</th>
               <th className="py-2">Email</th>
-              <th className="py-2">Rôle</th>
+              {/* <th className="py-2">Rôle</th> */}
               <th className="py-2">Date d'inscription</th>
             </tr>
           </thead>
@@ -150,7 +150,7 @@ export default function UsersPage() {
                 <tr key={user._id} className="border-b hover:bg-gray-50">
                   <td className="py-2">{user.username}</td>
                   <td className="py-2">{user.email}</td>
-                  <td className="py-2">{user.password}</td> {/* utilisé ici comme rôle */}
+                  {/* <td className="py-2">{user.password}</td> utilisé ici comme rôle */}
                   <td className="py-2">
                     {new Date(user.createdAt).toLocaleDateString("fr-FR")}
                   </td>
