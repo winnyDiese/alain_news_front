@@ -6,22 +6,22 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api"
 
   const refreshPost = async () => {
-    const updated = await fetch(`${API_URL}/${id}`).then(res => res.json())
+    const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
     setPosts()
   }
 
   const handleLike = async () => {
-    await fetch(`${API_URL}/${id}/like`, {
+    await fetch(`${API_URL}/posts/${id}/like`, {
       method: 'POST'
     })
     refreshPost();
   }
 
   useEffect(() => {
-      fetch(`${API_URL}`)
+      fetch(`${API_URL}/posts`)
       .then(res => res.json())
       .then(data => {
         console.log("Posts récupérés :", data)
