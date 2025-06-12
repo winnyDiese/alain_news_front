@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
 const LoginPage = () => {
+  
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [label_btn, setLabel_btn] = useState("Log In");
