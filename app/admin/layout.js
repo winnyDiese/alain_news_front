@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { LayoutDashboard, FileText, Users } from "lucide-react"
+import { LayoutDashboard, FileText, Users, Store } from "lucide-react"
 
 export default function AdminLayout({ children }) {
   return (
@@ -35,6 +35,15 @@ export default function AdminLayout({ children }) {
               >
                 <Users className="w-5 h-5" />
                 <span>Users</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/vitrine"
+                className="flex items-center space-x-3 hover:bg-gray-800 px-3 py-2 rounded-md transition-colors"
+              >
+                <Store className="w-5 h-5" />
+                <span>Site web</span>
               </Link>
             </li>
           </ul>
