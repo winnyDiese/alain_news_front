@@ -43,6 +43,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex min-h-screen">
+      
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
@@ -93,6 +94,7 @@ const LoginPage = () => {
           </p>
         </div>
       </div>
+
     </div>
   );
 };
