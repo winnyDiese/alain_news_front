@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
@@ -27,7 +27,7 @@ const LoginPage = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       router.push("/admin");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erreur :", error.message);
       alert("Connexion échouée. Vérifiez vos identifiants.");
     }
@@ -38,7 +38,7 @@ const LoginPage = () => {
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Connexion</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Sign In</h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-gray-600 mb-1">Email</label>
@@ -47,18 +47,18 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Entrez votre email"
+                placeholder="Enter your email"
                 required
               />
             </div>
             <div>
-              <label className="block text-gray-600 mb-1">Mot de passe</label>
+              <label className="block text-gray-600 mb-1">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Entrez votre mot de passe"
+                placeholder="Enter your password"
                 required
               />
             </div>
@@ -66,10 +66,10 @@ const LoginPage = () => {
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
             >
-              Se connecter
+              Log In
             </button>
             <p className="text-sm text-gray-500 text-center mt-4">
-              Vous n'avez pas de compte ? <a href="#" className="text-blue-600">Créer un compte</a>
+              Don't have an account? <a href="#" className="text-blue-600">Sign up</a>
             </p>
           </form>
         </div>
@@ -78,9 +78,10 @@ const LoginPage = () => {
       {/* Right: Description */}
       <div className="hidden md:flex w-3/5 bg-blue-50 items-center justify-center p-12">
         <div className="max-w-md">
-          <h1 className="text-4xl font-bold text-blue-800 mb-4">Bon retour parmi nous !</h1>
+          <h1 className="text-4xl font-bold text-blue-800 mb-4">Welcome Back!</h1>
           <p className="text-lg text-gray-600">
-            Connectez-vous à votre tableau de bord pour gérer vos outils, consulter vos données, et rester informé. Simple, rapide, sécurisé.
+            This is your dashboard login page. Access all your tools, insights, and data in one
+            place. Secure, fast and simple.
           </p>
         </div>
       </div>
