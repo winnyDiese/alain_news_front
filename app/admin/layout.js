@@ -39,7 +39,7 @@ export default function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/admin/vitrine"
+                href="/blog"
                 className="flex items-center space-x-3 hover:bg-gray-800 px-3 py-2 rounded-md transition-colors"
               >
                 <Store className="w-5 h-5" />
