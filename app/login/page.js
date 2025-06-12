@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useAuth from "../hooks/useAuth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
@@ -11,8 +10,15 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [label_btn, setLabel_btn] = useState("Log In");
   const router = useRouter();
+  
 
-  useAuth();
+   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/admin");
+    }
+  }, [router]);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -43,7 +49,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex min-h-screen">
-      
+
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
