@@ -1,9 +1,15 @@
 'use client'
 
 import Link from "next/link"
-import { LayoutDashboard, FileText, Users, Store } from "lucide-react"
+import { LayoutDashboard, FileText, Users, Store, LogOut } from "lucide-react"
 
 export default function AdminLayout({ children }) {
+
+  const handleLogout = () => {
+    localStorage.removeItem("token") // ou sessionStorage selon ton usage
+    window.location.href = "/blog" // ou router.push("/") si tu utilises Next.js router
+  }
+
   return (
     <body className="bg-gray-100 min-h-screen">
       <div className="flex">
@@ -45,6 +51,15 @@ export default function AdminLayout({ children }) {
                 <Store className="w-5 h-5" />
                 <span>Site web</span>
               </Link>
+            </li>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-3 hover:bg-gray-800 px-3 py-2 rounded-md transition-colors w-full text-left"
+              >
+                <LogOut className="w-5 h-5" />
+                <span>Déconnexion</span>
+              </button>
             </li>
           </ul>
         </aside>
