@@ -7,7 +7,7 @@ export default function AdminLayout({ children }) {
 
   const handleLogout = () => {
     localStorage.removeItem("token") // ou sessionStorage selon ton usage
-    window.location.href = "/blog" // ou router.push("/") si tu utilises Next.js router
+    window.location.href = "/login" // ou router.push("/") si tu utilises Next.js router
   }
 
   return (
