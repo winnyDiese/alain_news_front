@@ -8,6 +8,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [label_btn, setLabel_btn] = useState("Log In");
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -21,6 +22,10 @@ const LoginPage = () => {
       });
 
       if (!res.ok) throw new Error("Échec de la connexion");
+
+      setEmail("")
+      setPassword("")
+      setLabel_btn("Logging In")
 
       const { token, user } = await res.json();
       localStorage.setItem("token", token);
@@ -66,7 +71,7 @@ const LoginPage = () => {
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
             >
-              Log In
+              {label_btn}
             </button>
             <p className="text-sm text-gray-500 text-center mt-4">
               Don't have an account? <a href="#" className="text-blue-600">Sign up</a>
