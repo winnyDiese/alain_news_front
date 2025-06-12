@@ -16,9 +16,9 @@ export default function BlogLayout({ children }) {
                 </h1>              
                 
                 <nav className="space-x-4">
-                <Link href="/blog/new" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                    Ajouter un post
-                </Link>
+                  <Link href="/login" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                     Log in
+                  </Link>
                 </nav>
             </div>
             </header>
