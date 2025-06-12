@@ -55,7 +55,7 @@ export default function AdminLayout({ children }) {
             <li>
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-3 hover:bg-gray-800 px-3 py-2 rounded-md transition-colors w-full text-left"
+                className="flex items-center space-x-3 border border-orange-400 text-white hover:bg-orange-500 px-3 py-2 rounded-md transition-colors w-full text-left"
               >
                 <LogOut className="w-5 h-5" />
                 <span>Déconnexion</span>
