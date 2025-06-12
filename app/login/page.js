@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import useAuth from "../hooks/useAuth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
@@ -10,6 +11,8 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [label_btn, setLabel_btn] = useState("Log In");
   const router = useRouter();
+
+  useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
