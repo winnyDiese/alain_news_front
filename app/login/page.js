@@ -56,7 +56,7 @@ const LoginPage = () => {
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
-          <h2 className="text-3xl font-bold mb-3 text-gray-800">Alino Nzungu</h2>
+          <h2 className="text-3xl font-bold mb-2 text-gray-800">Alino Nzungu</h2>
           <h2 className="text-2xl font-semibold mb-6 text-gray-600">Sign in</h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
