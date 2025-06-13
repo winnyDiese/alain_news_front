@@ -180,32 +180,31 @@ const BlogDashboard = () => {
                 )}
             </div>
 
-           <div className="flex flex-col md:flex-row gap-4">
-                {/* Liste des blogs (mobile: visible uniquement si rien n'est sélectionné) */}
-                {!selectedBlog && (
-                    <div className="md:w-1/3 w-full bg-white rounded-2xl shadow-lg p-4 max-h-[calc(100vh-3rem)] overflow-y-auto border border-gray-200 custom-scroll">
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+                {/* Liste des blogs */}
+                <div className={`md:w-1/3 w-full bg-white rounded-2xl shadow-lg p-4 max-h-[calc(100vh-3rem)] overflow-y-auto border border-gray-200 custom-scroll
+                    ${selectedBlog && 'hidden md:block'}`}>
                     <div className="flex items-center gap-2 mb-4">
-                        <ScrollText className="text-blue-500" />
-                        <h2 className="text-xl font-semibold text-gray-700">Blog List</h2>
+                    <ScrollText className="text-blue-500" />
+                    <h2 className="text-xl font-semibold text-gray-700">Blog List</h2>
                     </div>
 
                     <ul>
-                        {posts.map((post) => (
+                    {posts.map((post) => (
                         <li
-                            key={post._id}
-                            onClick={() => setSelectedBlog(post)}
-                            className={`p-3 rounded-xl mb-2 cursor-pointer transition-all duration-200 ${
+                        key={post._id}
+                        onClick={() => setSelectedBlog(post)}
+                        className={`p-3 rounded-xl mb-2 cursor-pointer transition-all duration-200 ${
                             selectedBlog?._id === post._id
-                                ? "bg-blue-100 text-blue-800 shadow-inner"
-                                : "hover:bg-gray-100 text-gray-700"
-                            }`}
+                            ? "bg-blue-100 text-blue-800 shadow-inner"
+                            : "hover:bg-gray-100 text-gray-700"
+                        }`}
                         >
-                            <p className="font-medium">{post.title}</p>
+                        <p className="font-medium">{post.title}</p>
                         </li>
-                        ))}
+                    ))}
                     </ul>
-                    </div>
-                )}
+                </div>
 
                 {/* Article sélectionné */}
                 {selectedBlog && (
@@ -268,6 +267,7 @@ const BlogDashboard = () => {
                     </div>
                 )}
             </div>
+
 
         </div>
     );
