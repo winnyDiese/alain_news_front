@@ -2,8 +2,11 @@
 
 import Link from "next/link"
 import { LayoutDashboard, FileText, Users, Store, LogOut } from "lucide-react"
+import useAuth from "../hooks/useAuth";
 
 export default function AdminLayout({ children }) {
+
+  useAuth();
 
   const handleLogout = () => {
     localStorage.removeItem("token") // ou sessionStorage selon ton usage
