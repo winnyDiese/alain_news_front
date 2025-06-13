@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 
 const LoginPage = () => {
-  
+
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
   const [email, setEmail] = useState("");
@@ -56,7 +56,8 @@ const LoginPage = () => {
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Sign In</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Alino Nzungu</h2>
+          <h2 className="text-xl font-semibold mb-6 text-gray-600">Sign in</h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-gray-600 mb-1">Email</label>
