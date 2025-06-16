@@ -186,7 +186,7 @@ const BlogDashboard = () => {
                     {/* Like boutton */}
                         <LikeButton
                             postId={selectedBlog._id}
-                            initialLikes={selectedBlog.likes}
+                            likesCount={selectedBlog.likes}
                             onLikeSuccess={() => refreshPost(selectedBlog._id)}
                     />
                 </p>
