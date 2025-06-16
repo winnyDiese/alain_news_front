@@ -71,7 +71,7 @@ const BlogDashboard = () => {
     };
 
 
-    const refreshPost = async () => {
+    const refreshPost = async (id) => {
         const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
         setPosts()
     }
@@ -81,7 +81,7 @@ const BlogDashboard = () => {
             await fetch(`${API_URL}/posts/${postId}/like`, {
             method: 'POST',
             });
-            refreshPost(); // ou tu peux passer `postId` à refreshPost si nécessaire
+            refreshPost(postId); // ou tu peux passer `postId` à refreshPost si nécessaire
         } catch (error) {
             console.error("Erreur lors du like :", error);
         }
