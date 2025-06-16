@@ -243,6 +243,22 @@ const BlogDashboard = () => {
                     <CommentPage selectedBlog={selectedBlog} />
                 )}
 
+                {/* Colonne 2 : Commentaires */}
+                <div>
+                    <h2 className="text-2xl font-semibold mb-4">Comments</h2>
+                    {selectedBlog?.comments.length === 0 ? (
+                        <p className="text-gray-500 text-gray-400">No comments yet.</p>
+                    ) : (
+                        selectedBlog?.comments.map((c, i) => (
+                            <div key={i} className="mb-4 text-sm text-gray-600">
+                                <p className="font-semibold">{c?.author}</p>
+                                <p>{c?.content}</p>
+                                <hr className="mt-2"/>
+                            </div>
+                        ))
+                    )}
+                </div>
+
             </div>
             )}
         </div>
