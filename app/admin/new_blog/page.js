@@ -71,6 +71,22 @@ const BlogDashboard = () => {
         }
     };
 
+    const refreshPost = async (id) => {
+        try {
+            const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json());
+
+            setPosts(prevPosts =>
+            prevPosts.map(post =>
+                post._id === id ? updated : post
+            )
+            );
+
+            setSelectedBlog(prev => (prev && prev._id === id ? updated : prev));
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour du post :", error);
+        }
+    };
+
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
