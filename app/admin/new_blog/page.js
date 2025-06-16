@@ -244,20 +244,23 @@ const BlogDashboard = () => {
                 )}
 
                 {/* Colonne 2 : Commentaires */}
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">Comments</h2>
-                    {selectedBlog?.comments.length === 0 ? (
-                        <p className="text-gray-500 text-gray-400">No comments yet.</p>
-                    ) : (
-                        selectedBlog?.comments.map((c, i) => (
-                            <div key={i} className="mb-4 text-sm text-gray-600">
-                                <p className="font-semibold">{c?.author}</p>
-                                <p>{c?.content}</p>
-                                <hr className="mt-2"/>
+                <div className="mt-8">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Commentaires</h2>
+
+                    {Array.isArray(selectedBlog?.comments) && selectedBlog.comments.length > 0 ? (
+                        <div className="space-y-4">
+                        {selectedBlog.comments.map((comment, index) => (
+                            <div key={index} className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
+                            <p className="text-sm font-semibold text-blue-700">{comment?.author || 'Auteur inconnu'}</p>
+                            <p className="text-gray-700 mt-1">{comment?.content}</p>
                             </div>
-                        ))
+                        ))}
+                        </div>
+                    ) : (
+                        <p className="text-gray-500 italic">Aucun commentaire pour le moment.</p>
                     )}
                 </div>
+
 
             </div>
             )}
