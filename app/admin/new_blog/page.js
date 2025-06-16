@@ -230,10 +230,17 @@ const BlogDashboard = () => {
                             {selectedBlog.content}
                         </p>
 
-                        <New_comment_admin />
+                        <New_comment_admin
+                            selectedBlog={selectedBlog}
+                            author={author}
+                            setAuthor={setAuthor}
+                            comment={comment}
+                            setComment={setComment}
+                            handleCommentSubmit={handleCommentSubmit}
+                        />
 
                         {/* Commentaires */}
-                        <div>
+                        {/* <div>
                             <div className="flex items-center gap-2 mb-2 mt-6">
                             <MessageCircle className="text-green-500" />
                             <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
@@ -265,7 +272,7 @@ const BlogDashboard = () => {
                                 Envoyer
                             </button>
                             </form>
-                        </div>
+                        </div> */}
                     </div>
                 )}
             </div>
