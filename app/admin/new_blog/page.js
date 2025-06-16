@@ -197,14 +197,23 @@ const BlogDashboard = () => {
                 />
 
                 <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
-                {selectedBlog.content}
+                    {selectedBlog.content}
 
-                    {/* Like boutton */}
+                    <div className="flex items-center justify-between mt-4 mb-6">
+                        {/* Like boutton */}
                         <LikeButton
                             postId={selectedBlog._id}
                             likesCount={selectedBlog.likes}
                             onLikeSuccess={() => refreshPost(selectedBlog._id)}
-                    />
+                        />
+
+                        {/* Delete post */}
+                        <button
+                            className="text-sm text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md"
+                        >
+                            Supprimer
+                        </button>
+                    </div>
                 </p>
 
                 {selectedBlog && (
