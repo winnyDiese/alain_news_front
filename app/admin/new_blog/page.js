@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import New_comment_admin from "@/components/new_comment_admin";
+import CommentPage from "@/components/new_comment_admin";
 
 
 const BlogDashboard = () => {
@@ -230,13 +230,8 @@ const BlogDashboard = () => {
                             {selectedBlog.content}
                         </p>
 
-                        <New_comment_admin
+                        <CommentPage
                             selectedBlog={selectedBlog}
-                            author={author}
-                            setAuthor={setAuthor}
-                            comment={comment}
-                            setComment={setComment}
-                            handleCommentSubmit={handleCommentSubmit}
                         />
 
                         {/* Commentaires */}

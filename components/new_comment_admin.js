@@ -1,44 +1,58 @@
 "use client";
 
-import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import New_comment_admin from "@/components/new_comment_admin";
 
-const New_comment_admin = ({ selectedBlog, author, setAuthor, comment, setComment, handleCommentSubmit }) => {
+const CommentPage = ({ selectedBlog }) => {
+    const [author, setAuthor] = useState('');
+    const [comment, setComment] = useState('');
+
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!selectedBlog?._id) {
+            console.error("Aucun article sélectionné pour commenter.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`${API_URL}/posts/${selectedBlog._id}/comments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ author, content: comment }),
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error('Erreur ajout commentaire :', errorText);
+                return;
+            }
+
+            setAuthor('');
+            setComment('');
+
+            setTimeout(() => {
+                console.log("Rechargement forcé...");
+                window.location.reload();
+            }, 200);
+
+        } catch (error) {
+            console.error('Erreur soumission commentaire :', error);
+        }
+    };
+
     return (
-        <div>
-            <div className="flex items-center gap-2 mb-2 mt-6">
-                <MessageCircle className="text-green-500" />
-                <h3 className="text-xl font-semibold text-gray-700">Commentaires</h3>
-            </div>
-
-            <form onSubmit={handleCommentSubmit} className="space-y-4 mb-3">
-                <input
-                    type="text"
-                    name="author"
-                    placeholder="Votre nom"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <textarea
-                    name="comment"
-                    placeholder="Votre commentaire"
-                    rows={4}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                >
-                    Envoyer
-                </button>
-            </form>
-        </div>
+        <New_comment_admin
+            selectedBlog={selectedBlog}
+            author={author}
+            setAuthor={setAuthor}
+            comment={comment}
+            setComment={setComment}
+            handleCommentSubmit={handleCommentSubmit}
+        />
     );
 };
 
-export default New_comment_admin;
+export default CommentPage;
