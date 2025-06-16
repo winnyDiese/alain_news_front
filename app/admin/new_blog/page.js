@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ScrollText, PlusCircle } from "lucide-react";
+import { ScrollText, PlusCircle, Trash2 } from "lucide-react";
 import Image from "next/image";
 import CommentPage from "@/components/new_comment_admin"; // ✅ Corrigé ici
 import LikeButton from "@/components/Like_Button_admin";
@@ -84,6 +84,27 @@ const BlogDashboard = () => {
             setSelectedBlog(prev => (prev && prev._id === id ? updated : prev));
         } catch (error) {
             console.error("Erreur lors de la mise à jour du post :", error);
+        }
+    };
+
+    const handleDeletePost = async (id) => {
+        const confirmDelete = confirm("Voulez-vous vraiment supprimer ce post ?");
+        if (!confirmDelete) return;
+
+        try {
+            const res = await fetch(`${API_URL}/posts/${id}`, {
+            method: "DELETE",
+            });
+
+            if (!res.ok) {
+            throw new Error("Erreur lors de la suppression du post.");
+            }
+
+            // Supprimer le post côté client
+            setPosts((prev) => prev.filter((p) => p._id !== id));
+            setSelectedBlog(null); // On revient à la liste
+        } catch (error) {
+            alert("Erreur : " + error.message);
         }
     };
 
@@ -209,8 +230,10 @@ const BlogDashboard = () => {
 
                         {/* Delete post */}
                         <button
-                            className="text-sm text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md"
+                            onClick={() => handleDeletePost(selectedBlog._id)}
+                            className="text-sm text-red-600 hover:underline flex items-center gap-1"
                         >
+                            <Trash2 size={16} />
                             Supprimer
                         </button>
                     </div>
