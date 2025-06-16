@@ -24,7 +24,7 @@ const Dash = () => {
             <div className="bg-white p-4 rounded-2xl shadow">
             <div className="flex items-center justify-between">
                 <div>
-                <p className="text-gray-500">Revenue</p>
+                <p className="text-gray-500">Post</p>
                 <h2 className="text-2xl font-semibold">$23,500</h2>
                 </div>
                 <DollarSign className="text-green-500" />
@@ -34,27 +34,18 @@ const Dash = () => {
             <div className="bg-white p-4 rounded-2xl shadow">
             <div className="flex items-center justify-between">
                 <div>
-                <p className="text-gray-500">Invoices</p>
+                <p className="text-gray-500">Comments</p>
                 <h2 className="text-2xl font-semibold">326</h2>
                 </div>
                 <FileText className="text-yellow-500" />
             </div>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl shadow">
-            <div className="flex items-center justify-between">
-                <div>
-                <p className="text-gray-500">Visitors</p>
-                <h2 className="text-2xl font-semibold">9,876</h2>
-                </div>
-                <BarChart3 className="text-purple-500" />
-            </div>
-            </div>
         </div>
 
         {/* Table / Section */}
         <div className="bg-white p-6 rounded-2xl shadow">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+            <h2 className="text-xl font-semibold mb-4">Recent Posts</h2>
             <table className="w-full text-left text-sm">
             <thead className="text-gray-500 border-b">
                 <tr>
@@ -81,7 +72,7 @@ const Dash = () => {
 
         {/* Table / Section */}
         <div className="bg-white p-6 rounded-2xl shadow mt-4">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+            <h2 className="text-xl font-semibold mb-4">Recent Users</h2>
             <table className="w-full text-left text-sm">
             <thead className="text-gray-500 border-b">
                 <tr>
