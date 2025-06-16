@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ScrollText, PlusCircle } from "lucide-react";
 import Image from "next/image";
-import CommentPage from "@/components/comment"; // ✅ Corrigé ici
+import CommentPage from "@/components/new_comment_admin"; // ✅ Corrigé ici
 
 const BlogDashboard = () => {
   const [posts, setPosts] = useState([]);
