@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ScrollText, PlusCircle } from "lucide-react";
 import Image from "next/image";
-import CommentPage from "@/components/new_comment_admin_wrapper"; // ce wrapper contiendra le composant comment tel que tu veux
+import CommentPage from "@/components/new_comment_admin"; // ce wrapper contiendra le composant comment tel que tu veux
 
 const BlogDashboard = () => {
     const [posts, setPosts] = useState([]);
