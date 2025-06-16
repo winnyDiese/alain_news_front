@@ -108,6 +108,27 @@ const BlogDashboard = () => {
         }
     };
 
+    const handleDeleteComment = async (postId, commentId) => {
+        const confirmDelete = confirm("Supprimer ce commentaire ?");
+        if (!confirmDelete) return;
+
+        try {
+            const res = await fetch(`${API_URL}/posts/${postId}/comments/${commentId}`, {
+            method: "DELETE",
+            });
+
+            if (!res.ok) {
+            throw new Error("Erreur lors de la suppression du commentaire.");
+            }
+
+            // Recharger le post après suppression
+            await refreshPost(postId);
+        } catch (error) {
+            alert("Erreur : " + error.message);
+        }
+    };
+
+
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -249,18 +270,18 @@ const BlogDashboard = () => {
 
                     {Array.isArray(selectedBlog?.comments) && selectedBlog.comments.length > 0 ? (
                         <div className="space-y-4">
-                        {selectedBlog.comments.map((comment, index) => (
+                            {selectedBlog.comments.map((comment, index) => (
                             <div key={index} className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm relative">
-                            <p className="text-sm font-semibold text-blue-700">{comment?.author || 'Auteur inconnu'}</p>
-                            <p className="text-gray-700 mt-1 mb-4">{comment?.content}</p>
+                                <p className="text-sm font-semibold text-blue-700">{comment?.author || 'Auteur inconnu'}</p>
+                                <p className="text-gray-700 mt-1 mb-4">{comment?.content}</p>
 
-                            {/* Bouton Supprimer */}
-                            <button
-                                className="text-red-500 text-xs absolute bottom-2 left-4 hover:underline mt-4"
-                                onClick={() => alert(`Suppression du commentaire #${index}`)} // remplace par ta vraie fonction
-                            >
-                                Supprimer
-                            </button>
+                                {/* Bouton Supprimer */}
+                               <button
+                                    className="text-red-500 text-xs absolute bottom-2 left-4 hover:underline mt-4"
+                                    onClick={() => handleDeleteComment(selectedBlog._id, comment._id)}
+                                >
+                                    Supprimer
+                                </button>
                             </div>
                         ))}
                         </div>

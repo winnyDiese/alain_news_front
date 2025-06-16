@@ -128,6 +128,7 @@ export default function PostDetail() {
                     ))
                 )}
             </div>
+            
         </div>
     )
 }
