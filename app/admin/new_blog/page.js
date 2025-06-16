@@ -70,7 +70,7 @@ const BlogDashboard = () => {
         }
     };
 
-    
+
     const refreshPost = async () => {
         const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
         setPosts()
@@ -201,12 +201,12 @@ const BlogDashboard = () => {
                {/* Like boutton */}
                 <div className="flex items-center gap-2 mb-6 mt-3">
                     <button
-                        onClick={() => handleLike(post._id)}
+                        onClick={() => handleLike(selectedBlog._id)}
                         className="text-red-500 text-xs hover:scale-110 transition"
                     >
                         ❤️
                     </button>
-                    <span>{post?.likes} like{post?.likes !== 1 && 's'}</span>
+                    <span>{selectedBlog?.likes} like{selectedBlog?.likes !== 1 && 's'}</span>
                 </div>
 
             </p>
