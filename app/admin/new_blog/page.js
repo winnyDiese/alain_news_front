@@ -212,17 +212,12 @@ const BlogDashboard = () => {
                 <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
                 {selectedBlog.content}
 
-                {/* Like boutton */}
-                    <div className="flex items-center gap-2 mb-6 mt-3">
-                        <button
-                            onClick={() => handleLike(selectedBlog._id)}
-                            className="text-red-500 text-xs hover:scale-110 transition"
-                        >
-                            ❤️
-                        </button>
-                        <span>{selectedBlog?.likes} like{selectedBlog?.likes !== 1 && 's'}</span>
-                    </div>
-
+                    {/* Like boutton */}
+                        <LikeBtn
+                            postId={selectedBlog._id}
+                            initialLikes={selectedBlog.likes}
+                            onLikeSuccess={() => refreshPost(selectedBlog._id)}
+                    />
                 </p>
 
                 {selectedBlog && (
