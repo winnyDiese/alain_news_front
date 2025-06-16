@@ -124,7 +124,7 @@ export default function AdminLayout({ children }) {
         )}
 
         {/* Contenu principal */}
-        <main className="flex-1 p-6 md:ml-64">
+        <main className="flex-1 p-6 ">
           {children}
         </main>
       </div>

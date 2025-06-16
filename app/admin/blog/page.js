@@ -50,6 +50,7 @@ const BlogDashboard = () => {
         })
     },[])
 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -82,7 +83,6 @@ const BlogDashboard = () => {
             setLoading(false);
         }
     };
-
 
    const handleCommentSubmit = async (e) => {
         e.preventDefault();
