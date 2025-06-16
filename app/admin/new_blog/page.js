@@ -231,7 +231,7 @@ const BlogDashboard = () => {
                         {/* Delete post */}
                         <button
                             onClick={() => handleDeletePost(selectedBlog._id)}
-                            className="text-sm text-red-600 hover:underline flex items-center gap-1"
+                            className="text-sm bg-red-600 text-white hover:bg-red-500 flex items-center gap-1"
                         >
                             <Trash2 size={16} />
                             Supprimer
