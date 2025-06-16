@@ -250,9 +250,17 @@ const BlogDashboard = () => {
                     {Array.isArray(selectedBlog?.comments) && selectedBlog.comments.length > 0 ? (
                         <div className="space-y-4">
                         {selectedBlog.comments.map((comment, index) => (
-                            <div key={index} className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
+                            <div key={index} className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm relative">
                             <p className="text-sm font-semibold text-blue-700">{comment?.author || 'Auteur inconnu'}</p>
-                            <p className="text-gray-700 mt-1">{comment?.content}</p>
+                            <p className="text-gray-700 mt-1 mb-4">{comment?.content}</p>
+
+                            {/* Bouton Supprimer */}
+                            <button
+                                className="text-red-500 text-xs absolute bottom-2 left-4 hover:underline"
+                                onClick={() => alert(`Suppression du commentaire #${index}`)} // remplace par ta vraie fonction
+                            >
+                                Supprimer
+                            </button>
                             </div>
                         ))}
                         </div>
@@ -260,7 +268,6 @@ const BlogDashboard = () => {
                         <p className="text-gray-500 italic">Aucun commentaire pour le moment.</p>
                     )}
                 </div>
-
 
             </div>
             )}
