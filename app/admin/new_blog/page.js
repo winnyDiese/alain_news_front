@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ScrollText, MessageCircle, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import New_comment_admin from "@/components/new_comment_admin";
 
 
 const BlogDashboard = () => {
@@ -229,6 +229,8 @@ const BlogDashboard = () => {
                         <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
                             {selectedBlog.content}
                         </p>
+
+                        <New_comment_admin />
 
                         {/* Commentaires */}
                         <div>

@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const new_comment_admin = () => {
+const New_comment_admin = () => {
   return (
-    <div>new_comment_admin</div>
+    <div>nNw_comment_admin</div>
   )
 }
+
+export default New_comment_admin
