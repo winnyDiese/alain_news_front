@@ -16,66 +16,76 @@ const BlogDashboard = () => {
 
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`${API_URL}/posts`);
-        const data = await res.json();
-        const cleaned = Array.isArray(data) ? data.filter(p => p && typeof p.title === "string") : [];
-        setPosts(cleaned);
-      } catch (err) {
-        console.error("Erreur de récupération :", err);
-        setPosts([]);
-      }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    fetchPosts();
-  }, []);
+    useEffect(() => {
+        const fetchPosts = async () => {
+        try {
+            const res = await fetch(`${API_URL}/posts`);
+            const data = await res.json();
+            const cleaned = Array.isArray(data) ? data.filter(p => p && typeof p.title === "string") : [];
+            setPosts(cleaned);
+        } catch (err) {
+            console.error("Erreur de récupération :", err);
+            setPosts([]);
+        }
+        };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
+        fetchPosts();
+    }, []);
 
-    try {
-      const res = await fetch(`${API_URL}/posts`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        setSuccess('');
 
-      if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.message || 'Une erreur est survenue.');
-      }
+        try {
+        const res = await fetch(`${API_URL}/posts`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
 
-      setSuccess('Article publié avec succès.');
-      setFormData({ title: '', content: '' });
+        if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(errData.message || 'Une erreur est survenue.');
+        }
 
-      const refreshed = await fetch(`${API_URL}/posts`);
-      const data = await refreshed.json();
-      const cleaned = Array.isArray(data) ? data.filter(p => p && typeof p.title === "string") : [];
-      setPosts(cleaned);
+        setSuccess('Article publié avec succès.');
+        setFormData({ title: '', content: '' });
 
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
+        const refreshed = await fetch(`${API_URL}/posts`);
+        const data = await refreshed.json();
+        const cleaned = Array.isArray(data) ? data.filter(p => p && typeof p.title === "string") : [];
+        setPosts(cleaned);
+
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setLoading(false);
+        }
+    };
+
+    
+    const refreshPost = async () => {
+        const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
+        setPosts()
     }
-  };
 
-   const handleLike = async () => {
-        await fetch(`${API_URL}/posts/${id}/like`, {
-            method: 'POST'
-        })
-        refreshPost();
-    }
+    const handleLike = async (postId) => {
+        try {
+            await fetch(`${API_URL}/posts/${postId}/like`, {
+            method: 'POST',
+            });
+            refreshPost(); // ou tu peux passer `postId` à refreshPost si nécessaire
+        } catch (error) {
+            console.error("Erreur lors du like :", error);
+        }
+    };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -155,13 +165,7 @@ const BlogDashboard = () => {
               >
                 <p className="font-medium">{post.title}</p>
 
-                {/* Like boutton */}
-                <div className="flex items-center gap-2 mb-6 mt-3">
-                  <button onClick={handleLike} className="text-red-500 text-xs hover:scale-110 transition">
-                    ❤️
-                  </button>
-                  <span>{posts?.likes} like{posts?.likes !== 1 && 's'}</span>
-                </div>
+               
 
               </li>
               
@@ -193,6 +197,18 @@ const BlogDashboard = () => {
 
             <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
               {selectedBlog.content}
+
+               {/* Like boutton */}
+                <div className="flex items-center gap-2 mb-6 mt-3">
+                    <button
+                        onClick={() => handleLike(post._id)}
+                        className="text-red-500 text-xs hover:scale-110 transition"
+                    >
+                        ❤️
+                    </button>
+                    <span>{post?.likes} like{post?.likes !== 1 && 's'}</span>
+                </div>
+
             </p>
 
             {selectedBlog && (
