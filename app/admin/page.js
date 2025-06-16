@@ -31,7 +31,7 @@ const Dash = () => {
       </header>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-4 rounded-2xl shadow">
           <div className="flex items-center justify-between">
             <div>
