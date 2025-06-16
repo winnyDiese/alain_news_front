@@ -128,7 +128,6 @@ export default function AdminLayout({ children }) {
           {children}
         </main>
 
-
       </div>
     </body>
   )
