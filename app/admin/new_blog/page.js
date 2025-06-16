@@ -70,6 +70,13 @@ const BlogDashboard = () => {
     }
   };
 
+   const handleLike = async () => {
+        await fetch(`${API_URL}/posts/${id}/like`, {
+            method: 'POST'
+        })
+        refreshPost();
+    }
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
       {/* Création */}
@@ -147,7 +154,17 @@ const BlogDashboard = () => {
                 }`}
               >
                 <p className="font-medium">{post.title}</p>
+
+                {/* Like boutton */}
+                <div className="flex items-center gap-2 mb-6 mt-3">
+                  <button onClick={handleLike} className="text-red-500 text-xs hover:scale-110 transition">
+                    ❤️
+                  </button>
+                  <span>{posts?.likes} like{posts?.likes !== 1 && 's'}</span>
+                </div>
+
               </li>
+              
             ))}
           </ul>
         </div>
@@ -181,7 +198,7 @@ const BlogDashboard = () => {
             {selectedBlog && (
                 <CommentPage selectedBlog={selectedBlog} />
             )}
-            
+
           </div>
         )}
       </div>
