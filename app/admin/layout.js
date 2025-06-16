@@ -43,7 +43,7 @@ export default function AdminLayout({ children }) {
             fixed top-0 left-0 h-full bg-gray-900 text-white p-6 min-h-screen z-40 w-64
             transform transition-transform duration-300 ease-in-out
 
-            md:relative md:translate-x-0
+            md:translate-x-0
             ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
           `}
         >
@@ -124,9 +124,11 @@ export default function AdminLayout({ children }) {
         )}
 
         {/* Contenu principal */}
-        <main className="flex-1 p-6 ">
+        <main className="flex-1 p-6 md:ml-64">
           {children}
         </main>
+
+
       </div>
     </body>
   )
