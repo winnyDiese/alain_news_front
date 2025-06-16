@@ -71,21 +71,29 @@ const BlogDashboard = () => {
     };
 
 
-    const refreshPost = async (id) => {
-        const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
-        setPosts()
-    }
+   const refreshPost = async (id) => {
+  try {
+    const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json());
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
+        post._id === id ? updated : post
+      )
+    );
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du post :", error);
+  }
+};
 
-    const handleLike = async (postId) => {
-        try {
-            await fetch(`${API_URL}/posts/${postId}/like`, {
-            method: 'POST',
-            });
-            refreshPost(postId); // ou tu peux passer `postId` à refreshPost si nécessaire
-        } catch (error) {
-            console.error("Erreur lors du like :", error);
-        }
-    };
+const handleLike = async (postId) => {
+  try {
+    await fetch(`${API_URL}/posts/${postId}/like`, {
+      method: 'POST',
+    });
+    refreshPost(postId);
+  } catch (error) {
+    console.error("Erreur lors du like :", error);
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
