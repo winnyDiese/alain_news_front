@@ -1,3 +1,6 @@
+"use client"
+
+
 import { useEffect, useState } from 'react';
 import { BarChart3, Users, DollarSign, FileText } from 'lucide-react';
 
