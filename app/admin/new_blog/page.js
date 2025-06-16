@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ScrollText, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import CommentPage from "@/components/new_comment_admin"; // ✅ Corrigé ici
+import LikeButton from "@/components/Like_Button_admin";
 
 const BlogDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -70,36 +71,6 @@ const BlogDashboard = () => {
         }
     };
 
-
-    const refreshPost = async (id) => {
-        try {
-            const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json());
-
-            // Met à jour la liste des posts
-            setPosts(prevPosts =>
-            prevPosts.map(post =>
-                post._id === id ? updated : post
-            )
-            );
-
-            // Met aussi à jour le post affiché à droite
-            setSelectedBlog(prev => prev && prev._id === id ? updated : prev);
-
-        } catch (error) {
-            console.error("Erreur lors de la mise à jour du post :", error);
-        }
-    };
-
-    const handleLike = async (postId) => {
-        try {
-            await fetch(`${API_URL}/posts/${postId}/like`, {
-            method: 'POST',
-            });
-            refreshPost(postId);
-        } catch (error) {
-            console.error("Erreur lors du like :", error);
-        }
-    };
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 p-6 space-y-6">
@@ -213,7 +184,7 @@ const BlogDashboard = () => {
                 {selectedBlog.content}
 
                     {/* Like boutton */}
-                        <LikeBtn
+                        <LikeButton
                             postId={selectedBlog._id}
                             initialLikes={selectedBlog.likes}
                             onLikeSuccess={() => refreshPost(selectedBlog._id)}
