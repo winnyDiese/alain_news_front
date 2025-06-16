@@ -256,7 +256,7 @@ const BlogDashboard = () => {
 
                             {/* Bouton Supprimer */}
                             <button
-                                className="text-red-500 text-xs absolute bottom-2 left-4 hover:underline"
+                                className="text-red-500 text-xs absolute bottom-2 left-4 hover:underline mt-4"
                                 onClick={() => alert(`Suppression du commentaire #${index}`)} // remplace par ta vraie fonction
                             >
                                 Supprimer
