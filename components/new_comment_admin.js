@@ -33,13 +33,14 @@ const CommentPage = ({ selectedBlog }) => {
         throw new Error(errorText || 'Erreur lors de l’ajout du commentaire.');
       }
 
-      setAuthor('');
-      setComment('');
-      setSuccess('Commentaire ajouté avec succès.');
+        setAuthor('');
+        setComment('');
+        setSuccess('Commentaire ajouté avec succès.');
 
-      setTimeout(() => {
-        window.location.reload(); // Recharge pour afficher le commentaire ajouté
-      }, 500);
+        // Recharger après 2 secondes, pour laisser le temps de tout réinitialiser
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
 
     } catch (error) {
       console.error('Erreur soumission commentaire :', error);

@@ -177,9 +177,11 @@ const BlogDashboard = () => {
             <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
               {selectedBlog.content}
             </p>
+
             {selectedBlog && (
                 <CommentPage selectedBlog={selectedBlog} />
             )}
+            
           </div>
         )}
       </div>
