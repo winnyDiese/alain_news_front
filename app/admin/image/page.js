@@ -26,7 +26,7 @@ const NewPostForm = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -34,14 +34,19 @@ const NewPostForm = () => {
     formData.append("content", content);
     formData.append("image", image);
 
-    const res = await fetch("https://alain-news-api.onrender.com/api/file", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+        const res = await fetch("https://alain-news-api.onrender.com/api/file", {
+        method: "POST",
+        body: formData,
+        });
 
-    const data = await res.json();
-    console.log(data);
-  };
+        const data = await res.json();
+        console.log("✅ Réponse du serveur :", data);
+    } catch (error) {
+        console.error("❌ Erreur lors de l'upload :", error);
+    }
+};
+
 
   return (
     <form onSubmit={handleSubmit}>
