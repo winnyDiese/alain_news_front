@@ -42,7 +42,7 @@ const NewPostForm = () => {
     formData.append("image", image);
 
     try {
-      const res = await fetch("https://alain-news-api.onrender.com/api/file/", {
+      const res = await fetch(`${API_URL}/file/`, {
         method: "POST",
         body: formData,
       });
