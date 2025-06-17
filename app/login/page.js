@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const LoginPage = () => {
@@ -56,7 +57,7 @@ const LoginPage = () => {
       {/* Left: Login Form */}
       <div className="w-full md:w-2/5 flex items-center justify-center bg-white p-8 shadow-md">
         <div className="w-full max-w-sm">
-          <Link 
+          <Link
             href="/blog" // Remplacez par le chemin souhaité (ex: "/about", "/contact")
             className="text-3xl font-bold mb-2 text-gray-800 hover:text-blue-600 transition-colors"
           >
