@@ -29,6 +29,8 @@ const NewPostForm = () => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [cloudinaryPublicId, setCloudinaryPublicId] = useState(null);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,7 +42,7 @@ const NewPostForm = () => {
     formData.append("image", image);
 
     try {
-      const res = await fetch("https://alain-news-api.onrender.com/api/file", {
+      const res = await fetch("https://alain-news-api.onrender.com/api/file/", {
         method: "POST",
         body: formData,
       });
