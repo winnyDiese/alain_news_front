@@ -18,6 +18,7 @@ const BlogDashboard = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
     const defaultImageUrl = "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80";
 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -230,7 +231,7 @@ const BlogDashboard = () => {
                     </h2>
 
                     <Image
-                        src={selectedBlog?.imageUrl || defaultImageUrl}
+                        src={selectedBlog?.imageUrl }
                         alt={selectedBlog?.title || "Image de blog"}
                         width={800}
                         height={400}
