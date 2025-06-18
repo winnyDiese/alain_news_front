@@ -96,7 +96,6 @@ const BlogDashboard = () => {
           <h2 className="text-2xl font-bold text-gray-800">Articles de blog</h2>
           <Link
             href="/admin/image"
-            onClick={() => alert("Redirection vers le formulaire de création...")}
             className="text-blue-600 hover:underline text-sm flex items-center gap-1"
           >
             <PlusCircle size={18} />
