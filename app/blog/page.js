@@ -73,7 +73,7 @@ export default function Home() {
               </div>
               <div className="relative h-24">
                 <Image
-                  src={post?.imageUrl || defaultImageUrl}
+                  src={post?.imageUrl }
                   alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover transition duration-300 group-hover:scale-105"
@@ -97,7 +97,7 @@ export default function Home() {
           >
             <div className="relative h-64">
               <Image
-                src={posts?.imageUrl || defaultImageUrl}
+                src={posts?.imageUrl }
                 alt={posts?.title || "Image de blog"}
                 fill
                 className="object-cover"
@@ -128,7 +128,7 @@ export default function Home() {
             >
               <div className="relative h-48">
                 <Image
-                  src={post?.imageUrl || defaultImageUrl}
+                  src={post?.imageUrl }
                   alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover"
@@ -152,7 +152,7 @@ export default function Home() {
             >
               <div className="relative h-48">
                 <Image
-                  src={post?.imageUrl || defaultImageUrl}
+                  src={post?.imageUrl }
                   alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover"
