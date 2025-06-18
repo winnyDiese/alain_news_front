@@ -15,7 +15,8 @@ const BlogDashboard = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api";
+    const defaultImageUrl = "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80";
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -231,12 +232,11 @@ const BlogDashboard = () => {
                     </h2>
 
                     <Image
-                    src={selectedBlog.imageUrl}
-                    // src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
-                    alt={selectedBlog.title}
-                    width={800}
-                    height={400}
-                    className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
+                        src={selectedBlog?.imageUrl || defaultImageUrl}
+                        alt={selectedBlog?.title}
+                        width={800}
+                        height={400}
+                        className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
                     />
 
                     <p className="text-gray-700 text-lg leading-relaxed tracking-wide">
