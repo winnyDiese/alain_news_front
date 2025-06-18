@@ -97,8 +97,8 @@ export default function Home() {
           >
             <div className="relative h-64">
               <Image
-                src={posts?.imageUrl }
-                alt={posts?.title || "Image de blog"}
+                src={posts[0]?.imageUrl }
+                alt={posts[0]?.title || "Image de blog"}
                 fill
                 className="object-cover"
               />
