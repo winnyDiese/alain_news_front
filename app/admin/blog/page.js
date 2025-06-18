@@ -233,7 +233,7 @@ const BlogDashboard = () => {
 
                     <Image
                         src={selectedBlog?.imageUrl || defaultImageUrl}
-                        alt={selectedBlog?.title}
+                        alt={selectedBlog?.title || "Image de blog"}
                         width={800}
                         height={400}
                         className="w-full h-64 object-cover rounded-xl mb-6 shadow-md"
