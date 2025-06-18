@@ -9,6 +9,7 @@ export default function PostDetail() {
     const [author, setAuthor] = useState('')
     const [comment, setComment] = useState('')
     const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api/posts"
+    const defaultImageUrl = "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80";
 
 
     const fetchPost = async () => {
@@ -76,7 +77,7 @@ export default function PostDetail() {
             <div>
                 <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
                 <img
-                    src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
+                    src={post?.imageUrl || defaultImageUrl}
                     alt={post?.title}
                     className="w-full h-64 object-cover rounded mb-4"
                 />
@@ -128,7 +129,7 @@ export default function PostDetail() {
                     ))
                 )}
             </div>
-            
+
         </div>
     )
 }

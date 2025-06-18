@@ -209,8 +209,6 @@ const BlogDashboard = () => {
                     >
                         <p className="font-medium">{post.title}</p>
 
-                    
-
                     </li>
                     
                     ))}
