@@ -77,7 +77,7 @@ export default function PostDetail() {
             <div>
                 <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
                 <img
-                    src={post?.imageUrl || defaultImageUrl}
+                    src={post?.imageUrl }
                     alt={post?.title}
                     className="w-full h-64 object-cover rounded mb-4"
                 />
