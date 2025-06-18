@@ -9,7 +9,7 @@ export default function Home() {
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://alain-news-back.onrender.com/api"
   const defaultImageUrl = "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80";
 
-  
+
   const refreshPost = async () => {
     const updated = await fetch(`${API_URL}/posts/${id}`).then(res => res.json())
     setPosts()
@@ -73,8 +73,8 @@ export default function Home() {
               </div>
               <div className="relative h-24">
                 <Image
-                  src={selectedBlog?.imageUrl || defaultImageUrl}
-                  alt={selectedBlog?.title || "Image de blog"}
+                  src={post?.imageUrl || defaultImageUrl}
+                  alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover transition duration-300 group-hover:scale-105"
                 />
@@ -97,8 +97,8 @@ export default function Home() {
           >
             <div className="relative h-64">
               <Image
-                src={selectedBlog?.imageUrl || defaultImageUrl}
-                alt={selectedBlog?.title || "Image de blog"}
+                src={posts?.imageUrl || defaultImageUrl}
+                alt={posts?.title || "Image de blog"}
                 fill
                 className="object-cover"
               />
@@ -128,8 +128,8 @@ export default function Home() {
             >
               <div className="relative h-48">
                 <Image
-                  src={selectedBlog?.imageUrl || defaultImageUrl}
-                  alt={selectedBlog?.title || "Image de blog"}
+                  src={post?.imageUrl || defaultImageUrl}
+                  alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover"
                 />
@@ -152,8 +152,8 @@ export default function Home() {
             >
               <div className="relative h-48">
                 <Image
-                  src={selectedBlog?.imageUrl || defaultImageUrl}
-                  alt={selectedBlog?.title || "Image de blog"}
+                  src={post?.imageUrl || defaultImageUrl}
+                  alt={post?.title || "Image de blog"}
                   fill
                   className="object-cover"
                 />
