@@ -5,6 +5,7 @@ import { ScrollText, PlusCircle, Trash2 } from "lucide-react";
 import Image from "next/image";
 import CommentPage from "@/components/admin/new_comment_admin";
 import LikeButton from "@/components/admin/Like_Button_admin";
+import Link from "next/link";
 
 const BlogDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -93,13 +94,14 @@ const BlogDashboard = () => {
       <div className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Articles de blog</h2>
-          <button
+          <Link
+            href="/admin/image"
             onClick={() => alert("Redirection vers le formulaire de création...")}
             className="text-blue-600 hover:underline text-sm flex items-center gap-1"
           >
             <PlusCircle size={18} />
             Nouveau post
-          </button>
+          </Link>
         </div>
       </div>
 
