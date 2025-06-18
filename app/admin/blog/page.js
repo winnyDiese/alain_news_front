@@ -231,7 +231,8 @@ const BlogDashboard = () => {
                     </h2>
 
                     <Image
-                    src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
+                    src={selectedBlog.imageUrl}
+                    // src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80"
                     alt={selectedBlog.title}
                     width={800}
                     height={400}
