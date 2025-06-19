@@ -64,10 +64,10 @@ export default function Home() {
                 </p>
                   
                 <div className="flex items-center gap-2 mb-6 mt-3">
-                  <button onClick={handleLike} className="text-red-500 text-xs hover:scale-110 transition">
+                  <button className="text-red-500 text-xs hover:scale-110 transition">
                     ❤️
                   </button>
-                  <span>{posts?.likes} like{posts?.likes !== 1 && 's'}</span>
+                  <span>{post?.likes} like{post?.likes !== 1 && 's'}</span>
                 </div>
 
               </div>
